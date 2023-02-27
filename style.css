@@ -1,0 +1,47 @@
+body{
+    background-color: #1E252B;
+}
+
+.nav {
+position: absolute;
+width: 100%;
+height: 3em;
+left: 0px;
+top: 0px;
+background: #262D34;
+}
+.flex-container{
+    display: flex;
+    flex-direction: row-reverse;
+}
+.flex{
+    height: 50em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.flex-left{
+    margin-top: 10em;
+    height : 20em;
+    display: flex;
+    justify-content: left;
+    align-items: left;
+    flex-direction: column;
+}
+.posts{
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin:1em;
+    margin-left: 15em;
+    padding-right: 20em;
+}
+.createPost{
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin:1em;
+    padding: 1em;
+    padding-right: 20em;
+}
