@@ -2,18 +2,19 @@ body{
     background-color: #1E252B;
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
-input {
+input  {
     width: 30em;
     border-radius: 6em;
     padding: 0.4em;
 }
 .nav {
-position: absolute;
-width: 100%;
-height: 3em;
-left: 0px;
-top: 0px;
+display:flex;
+align-items: center;
+justify-content: space-evenly;
+margin: 1em;
+padding:10px;
 background: #262D34;
+border-radius: 10px;
 }
 .flex-container{
     display: flex;

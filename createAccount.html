@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel = "stylesheet" href = "css/login.css">
+    
+    <title>Login & Create Account</title>
+</head>
+<body>
+    <section id="login">
+        <h1>Login</h1>
+        <form>
+            <input type="text" id="username" name="username" placeholder="Username"><br>
+            <input type="password" id="password" name="password" placeholder="Password"><br>
+            <input type="submit" value="Log in">
+        </form>
+        <p>New to WeChat? <a href="#" onclick="CreateAccountPage()">Sign Up</a></p>
+    </section>
+	<section id="create-account" style="display:none"> <!-- dont show create acct yet (hide) until user clicks sign up-->
+        <h1>Create Account</h1>
+        <form>
+            <input type="text" id="new-username" name="new-username" placeholder="Username"><br>
+            <input type="email" id="email" name="email" placeholder="Email Address"><br>
+            <input type="password" id="new-password" name="new-password" placeholder="Password"><br>
+            <input type = "password" id = "confirm-password" name = "confirm-password" placeholder="Confirm Password"><br>
+            <input type="submit" value="Create Account">
+        </form>
+        <p>Already have an account? <a href="#" onclick="LoginPage()">Log in</a></p>
+    </section>
+	<script src = "scripts/login.js"></script>
+    
+</body>
+</html>
