@@ -1,7 +1,12 @@
 body{
     background-color: #1E252B;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
 }
-
+input {
+    width: 30em;
+    border-radius: 6em;
+    padding: 0.4em;
+}
 .nav {
 position: absolute;
 width: 100%;
@@ -51,7 +56,6 @@ div.scroll{
     border-radius: 1em;
     margin:1em;
     padding: 1em;
-    padding-right: 20em;
 }
 .popular{
     border: solid #262D34;
@@ -72,16 +76,16 @@ footer{
     font-size: x-small;
 }
 .button {
-  background-color: #fbeee0;
+  background-color: #A67EF3;
   border: 2px solid #616161;
   border-radius: 30px;
-  box-shadow: #616161 4px 4px 0 0;
-  color: #616161;
+  box-shadow: #616161 2.5px 1.5px 0 0;
+  color: #3a3a3a;
   cursor: pointer;
   display: inline-block;
   font-weight: 600;
   font-size: 0.7em;
-  padding: 2em;
+  padding: 1em;
   line-height: 2em;
   text-align: center;
   text-decoration: none;
@@ -91,8 +95,8 @@ footer{
 }
 
 .button:hover {
-  background-color: #A67EF3;
-  transition: 0.5s;
+  background-color: #fbeee0;
+  transition: 0.4s;
 }
 
 .button:active {
@@ -103,6 +107,6 @@ footer{
 @media (min-width: 768px) {
   .button{
     min-width: 20px;
-    padding: 0 25px;
+    padding: 0 20px;
   }
 }
