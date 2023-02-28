@@ -6,6 +6,7 @@ input  {
     width: 30em;
     border-radius: 6em;
     padding: 0.4em;
+    background-color: #D9D9D9;
 }
 .nav {
 display:flex;
@@ -36,7 +37,7 @@ border-radius: 10px;
     align-items: left;
     flex-direction: column;
     margin-left: auto;
-    max-width: 10em;
+    max-width: 16em;
 }
 div.scroll{
     overflow-y: auto;
@@ -51,6 +52,7 @@ div.scroll{
     border-radius: 1em;
     margin:1em;
     padding-right: 20em;
+    padding-left: 1.5em;
 }
 .createPost{
     border: solid #262D34;
@@ -64,6 +66,8 @@ div.scroll{
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 .categories{
     color: rgb(160, 158, 158);
@@ -71,6 +75,8 @@ div.scroll{
     background-color: #262D34;
     border-radius: 1em;
     margin-top: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
 }
 footer{
     color: rgb(160, 158, 158);
@@ -78,12 +84,13 @@ footer{
     background-color: #262D34;
     border-radius: 1em;
     margin-top: 2em;
-    font-size: x-small;
+    font-size: small;
     padding-bottom: 2em;
 }
 .tos {
     display: inline-block;
-    width:20em;
+    width:14em;
+    padding-left: 1.4em;
 }
 .button {
   background-color: #A67EF3;
@@ -123,4 +130,5 @@ footer{
 img {
     width: 20em;
     height: 10em;
+    border-radius: 7px;
 }
