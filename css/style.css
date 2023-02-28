@@ -86,6 +86,10 @@ footer{
     margin-top: 2em;
     font-size: small;
     padding-bottom: 2em;
+    position: fixed;
+    bottom: 0;
+    max-height: 4em;
+    width: 100%;
 }
 .tos {
     display: inline-block;
@@ -131,4 +135,21 @@ img {
     width: 20em;
     height: 10em;
     border-radius: 7px;
+}
+.createPosts input{
+    padding: 1.2em;
+    margin: 1.2em;
+    border-radius: 1.2em;;
+}
+#description{
+    padding-bottom: 11em;
+    border-radius: 1.2em;
+}
+.flex-create{
+    height: 40em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
 }
