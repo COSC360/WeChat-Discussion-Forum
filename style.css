@@ -28,7 +28,7 @@ background: #262D34;
     margin: auto;
 }
 .flex-left{
-    margin-top: 5em;
+    margin-top: 10.5em;
     height : 20em;
     display: flex;
     justify-content: left;
@@ -44,6 +44,7 @@ div.scroll{
     height: 600px;
 }
 .posts{
+    color: rgb(160, 158, 158);
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
@@ -58,22 +59,30 @@ div.scroll{
     padding: 1em;
 }
 .popular{
+    color: rgb(160, 158, 158);
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
 }
 .categories{
+    color: rgb(160, 158, 158);
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
     margin-top: 2em;
 }
 footer{
+    color: rgb(160, 158, 158);
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
     margin-top: 2em;
     font-size: x-small;
+    padding-bottom: 2em;
+}
+.tos {
+    display: inline-block;
+    width:20em;
 }
 .button {
   background-color: #A67EF3;
@@ -109,4 +118,8 @@ footer{
     min-width: 20px;
     padding: 0 20px;
   }
+}
+img {
+    width: 20em;
+    height: 10em;
 }
