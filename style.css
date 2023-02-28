@@ -20,21 +20,29 @@ background: #262D34;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    margin: auto;
 }
 .flex-left{
-    margin-top: 10em;
+    margin-top: 5em;
     height : 20em;
     display: flex;
     justify-content: left;
     align-items: left;
     flex-direction: column;
+    margin-left: auto;
+    max-width: 10em;
+}
+div.scroll{
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: justify;
+    height: 600px;
 }
 .posts{
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
     margin:1em;
-    margin-left: 15em;
     padding-right: 20em;
 }
 .createPost{
@@ -44,4 +52,57 @@ background: #262D34;
     margin:1em;
     padding: 1em;
     padding-right: 20em;
+}
+.popular{
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+}
+.categories{
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin-top: 2em;
+}
+footer{
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin-top: 2em;
+    font-size: x-small;
+}
+.button {
+  background-color: #fbeee0;
+  border: 2px solid #616161;
+  border-radius: 30px;
+  box-shadow: #616161 4px 4px 0 0;
+  color: #616161;
+  cursor: pointer;
+  display: inline-block;
+  font-weight: 600;
+  font-size: 0.7em;
+  padding: 2em;
+  line-height: 2em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.button:hover {
+  background-color: #A67EF3;
+  transition: 0.5s;
+}
+
+.button:active {
+  box-shadow: #616161 2px 2px 0 0;
+  transform: translate(2px, 2px);
+}
+
+@media (min-width: 768px) {
+  .button{
+    min-width: 20px;
+    padding: 0 25px;
+  }
 }
