@@ -23,27 +23,32 @@
             <a href="#createPost" class = "button">Post</a>
         </div>
         <div class = "scroll">
-        <div class = "posts">
+        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
             <p style = "color:#A67EF3; font-size: .8em;">User3</p>
             <p>What are the best restaurants in Kelowna?</p>
         </div>
-        <div class = "posts">
+        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
             <p style = "color:#A67EF3; font-size: .8em;">ben10lover</p>
             <p>How do I center a div using css?</p>
         </div>
-        <div class = "posts">
+        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
             <p style = "color:#A67EF3; font-size: .8em;">carltonw23</p>
             <p>Today I woke up, ate breakfast and went to class</p>
         </div>
-        <div class = "posts">
+        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
             <p style = "color:#A67EF3; font-size: .8em;">marcuspork</p>
             <p>Sunset!</p>
             <img src = "images/19223285_web1_191104-KCN-Sunet-Photos.jpg" alt = "sunset">
         </div>
-        <div class = "posts">
+        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
             <p style = "color:#A67EF3; font-size: .8em;">cheeseh8ter</p>
             <p>What are the best restaurants in Kelowna?</p>
         </div>
+        <script>
+            function redirectToPost(){
+                window.location.href = "viewPost.html";
+            }
+        </script>
     </div>
     </div>
     <div class = "flex-left"> 
