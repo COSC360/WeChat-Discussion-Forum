@@ -153,3 +153,25 @@ img {
     flex-direction: column;
     margin: auto;
 }
+#commentBox{
+    padding-bottom: 6em;
+    margin-bottom: 2em;
+    border-radius: 1.2em;
+}
+.flex-comment{
+    height: 25em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: auto;
+}
+.comment{
+    color: rgb(160, 158, 158);
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin:1em;
+    padding-right: 10em;
+    padding-left: 1.5em;
+}
