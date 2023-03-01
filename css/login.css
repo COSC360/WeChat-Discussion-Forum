@@ -12,6 +12,38 @@ section {
     padding: 30px;
     text-align: center;
 }
+#passwordRules{
+  font-size: 0.9em;
+  display:none;
+  padding:30px;
+  background:#262D34;
+  max-width: 450px;
+  margin: 20px auto;
+  text-align:left;
+  border-radius:10px;
+}
+h3{
+  color:#8b55f0;
+  margin-top:10px;
+}
+/* change each password rule to green when it matches the required credentials*/
+.valid{
+  color:rgb(74, 247, 0);
+}
+.valid:before{
+position:relative;
+left:-20px;
+content:"\2713";
+}
+/* display "x" if the requirements for password are not met */
+.invalid{
+  color:red;
+}
+.invalid:before{
+  position: relative;
+  left:-20px;
+  content:"\2715";
+}
 input{
     width: 100%;
     padding: 12px 20px;
@@ -69,6 +101,7 @@ input[type="submit"] {
     max-width: 200px;
     
 }
+
   
 input[type="submit"]:hover {
     background-color: #8b55f0;

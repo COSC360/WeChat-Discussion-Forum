@@ -6,4 +6,6 @@ function LoginPage() {
 function CreateAccountPage() {
     document.getElementById("login").style.display = "none";
     document.getElementById("create-account").style.display = "block";
+    
 }
+
