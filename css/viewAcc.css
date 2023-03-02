@@ -1,0 +1,125 @@
+
+
+.user-info{
+    color: rgb(160, 158, 158);
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+.communities{
+    color: rgb(160, 158, 158);
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin-top: 2em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+    float:left;
+}
+
+.user-info p {
+	flex-basis: 50%;
+}
+
+.user-info strong {
+	margin-right: 10px;
+}
+
+.user-posts {
+	display: flex;
+	flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+
+.post {
+	flex-basis: 50%;
+	padding: 10px;
+	border: 2px solid #1E252B;
+    border-radius:10px;
+	margin-bottom: 20px;
+    background: #262D34;
+}
+.post-actions{
+    float:right;
+}
+a{
+    text-decoration: none;
+}
+
+  
+
+.post h3 {
+	margin-top: 0;
+}
+h1{
+    background: #262D34;
+}
+h2{
+    display: flex;
+    justify-content: center;
+}
+
+
+.post p:not(:last-child) {
+	margin-bottom: 5px;
+} 
+
+body {
+    background-color: #1E252B;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    display:flex;
+    justify-content: center;
+  }
+  
+  input  {
+    width: 20em;
+    border-radius: 1em;
+    padding: 0.1em;
+    height:3em;
+    background-color: #D9D9D9;
+}
+  
+  
+  
+.container{
+        margin-top: 10.5em;
+        height : 20em;
+        display: flex;
+        justify-content: left;
+        align-items: left;
+        flex-direction: column;
+        margin-left: auto;
+        max-width: 16em;
+}
+  
+  div.scroll {
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: justify;
+    height: 600px;
+  }
+  
+  footer {
+    color: rgb(160, 158, 158);
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 1em;
+    margin-top: 2em;
+    font-size: small;
+    padding-bottom: 2.3em;
+    position: relative;
+    bottom: 0;
+    max-height: 4em;
+    width: 100%;
+  }
+  
+  .tos {
+    display: inline-block;
+    width: 14em;
+    padding-left: 1.4em;
+  }

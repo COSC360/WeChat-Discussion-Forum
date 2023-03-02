@@ -86,7 +86,7 @@ footer{
     margin-top: 2em;
     font-size: small;
     padding-bottom: 2em;
-    position: fixed;
+    position: relative;
     bottom: 0;
     max-height: 4em;
     width: 100%;
