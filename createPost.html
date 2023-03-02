@@ -13,13 +13,13 @@
         <a href="createAccount.html" class = "button"> Login</a> 
         <input type = "text" placeholder = "Type here to search..">
         <a href= "#filter" class = "button">Filter</a>
-        <a href= "#top" class = "button">Home</a>
+        <a href= "home.html" class = "button">Home</a>
         <a href= "#settings" class = "button">Settings</a>
     </div>
     <div class = "flex-create">
         <div class = "createPost">
             <h1 style = "color:#A67EF3; font-size: 1.3em;" >Create Post</h1>
-            <form class = "createPosts">
+            <form class = "createPosts" name = "createPosts" onsubmit="return(validate());">
                 <input type="text" id="title" name="title" placeholder="Title"><br>
                 <input type ="text" id="community" name = "community" placeholder="Choose Community"><br>
                 <input type="text" id="description" name="description" placeholder="Description (optional)"><br>
@@ -28,7 +28,7 @@
             </form>
         </div>
 </div>
-    
+<script src = "scripts/postValidation.js"></script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>
