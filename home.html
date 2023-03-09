@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <link rel = "stylesheet" href = "css/style.css">
+    <script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeChat</title>
 </head>
 <body>
     <div class = "nav">
-        <a href="viewAccount.html" class = "button"> User</a> 
+        <a href="viewAccount.html" class = "button"> <i class="fa-solid fa-user"></i></a> 
         <a href="createAccount.html" class = "button"> Login</a> 
         <input type = "text" placeholder = "Type here to search..">
-        <a href= "#filter" class = "button">Filter</a>
-        <a href= "home.html" class = "button">Home</a>
-        <a href= "#settings" class = "button">Settings</a>
+        <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
+        <a href= "home.html" class = "button"><i class="fa-solid fa-house"></i></a>
+        <a href= "#settings" class = "button"><i class="fa-solid fa-gear"></i></a>
     </div>
 <div class = "flex-container">
     <div class = "flex">
@@ -23,31 +24,62 @@
             <a href="createPost.html" class = "button">Post</a>
         </div>
         <div class = "scroll">
-        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
+        <div class = "posts" id = "post1">
             <p style = "color:#A67EF3; font-size: .8em;">User3</p>
-            <p>What are the best restaurants in Kelowna?</p>
+            <p onclick="redirectToPost();" style = "cursor: pointer;">What are the best restaurants in Kelowna?</p>
+            <div class = "postContainer">
+            <div class = "postScore">10</div>
+            <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
+            <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
+            <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
         </div>
-        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
+        </div>
+        <div class = "posts" id = "post2">
             <p style = "color:#A67EF3; font-size: .8em;">ben10lover</p>
-            <p>How do I center a div using css?</p>
+            <p onclick="redirectToPost();" style = "cursor: pointer;">How do I center a div using css? </p>
+            <div class = "postContainer">
+                <div class = "postScore">10</div>
+                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
+                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
+                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
+            </div>    
         </div>
-        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
+        <div class = "posts" id = "post3" >
             <p style = "color:#A67EF3; font-size: .8em;">carltonw23</p>
-            <p>Today I woke up, ate breakfast and went to class</p>
+            <p onclick="redirectToPost();" style = "cursor: pointer;">Today I woke up, ate breakfast and went to class</p>
+            <div class = "postContainer">
+                <div class = "postScore">10</div>
+                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
+                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
+                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
+            </div>    
         </div>
-        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
+        <div class = "posts" id = "post4">
             <p style = "color:#A67EF3; font-size: .8em;">marcuspork</p>
-            <p>Sunset!</p>
+            <p onclick="redirectToPost();" style = "cursor: pointer;">Sunset!</p>
             <img src = "images/19223285_web1_191104-KCN-Sunet-Photos.jpg" alt = "sunset">
+            <div class = "postContainer">
+                <div class = "postScore">10</div>
+                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
+                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
+                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
+            </div>    
         </div>
-        <div class = "posts" onclick="redirectToPost();" style = "cursor: pointer;">
+        <div class = "posts" id = "post5">
             <p style = "color:#A67EF3; font-size: .8em;">cheeseh8ter</p>
-            <p>What are the best restaurants in Kelowna?</p>
+            <p onclick="redirectToPost();" style = "cursor: pointer;">How to improve at Baseball?</p>
+            <div class = "postContainer">
+                <div class = "postScore">10</div>
+                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
+                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
+                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
+            </div>    
         </div>
         <script>
             function redirectToPost(){
                 window.location.href = "viewPost.html";
             }
+
         </script>
     </div>
     </div>
@@ -70,7 +102,7 @@
       
     </div>
 </div>
-    
+<script src = "scripts/script.js"></script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>
