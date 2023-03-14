@@ -10,10 +10,10 @@
 <body>
     <div class = "nav">
         <a href="#user" class = "button"> User</a> 
-        <a href="createAccount.html" class = "button"> Login</a> 
+        <a href="createAccount.php" class = "button"> Login</a> 
         <input type = "text" placeholder = "Type here to search..">
         <a href= "#filter" class = "button">Filter</a>
-        <a href= "home.html" class = "button">Home</a>
+        <a href= "home.php" class = "button">Home</a>
         <a href= "#settings" class = "button">Settings</a>
     </div>
     <div class = "flex-create">

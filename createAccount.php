@@ -10,7 +10,7 @@
     <title>Login & Create Account</title>
 </head>
 <body>
-    <a href= "home.html" class = "button">Home</a>
+    <a href= "home.php" class = "button">Home</a>
     <section id="login">
         <h1>Login</h1>
         <form>

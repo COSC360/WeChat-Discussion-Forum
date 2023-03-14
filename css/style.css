@@ -183,3 +183,13 @@ img {
 .error {
     border-color: red;
 }
+.postContainer {
+    display: flex;
+    flex-direction: row;
+}
+.postContainer div {
+    padding-right: 1em;
+}
+.active{
+    color: #A67EF3;
+}

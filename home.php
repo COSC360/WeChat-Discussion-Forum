@@ -10,18 +10,18 @@
 </head>
 <body>
     <div class = "nav">
-        <a href="viewAccount.html" class = "button"> <i class="fa-solid fa-user"></i></a> 
-        <a href="createAccount.html" class = "button"> Login</a> 
+        <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
+        <a href="createAccount.php" class = "button"> Login</a> 
         <input type = "text" placeholder = "Type here to search..">
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
-        <a href= "home.html" class = "button"><i class="fa-solid fa-house"></i></a>
+        <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "#settings" class = "button"><i class="fa-solid fa-gear"></i></a>
     </div>
 <div class = "flex-container">
     <div class = "flex">
         <div class = "createPost">
             <input class = "postInp" type = "text" placeholder="Click post to share your thoughts">
-            <a href="createPost.html" class = "button">Post</a>
+            <a href="createPost.php" class = "button">Post</a>
         </div>
         <div class = "scroll">
         <div class = "posts" id = "post1">
@@ -77,7 +77,7 @@
         </div>
         <script>
             function redirectToPost(){
-                window.location.href = "viewPost.html";
+                window.location.href = "viewPost.php";
             }
 
         </script>
