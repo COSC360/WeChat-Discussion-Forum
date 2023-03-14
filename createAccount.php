@@ -24,7 +24,27 @@
     
 	<section id="create-account" style="display:none"> <!-- dont show create acct yet (hide) until user clicks sign up-->
         <h1>Create Account</h1>
-        <form>
+         <?php
+    // Include the database connection file
+        include 'connectDB.php';
+        if($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Get the form data
+        $username = $_POST['new-username'];
+        $email = $_POST['email'];
+        $password = $_POST['new-password'];
+
+    // Hash the password
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Insert the user data into the database
+        $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
+        $result = mysqli_query($conn, $query);
+
+// Close the database connection
+        mysqli_close($conn);
+        }
+        ?> 
+        <form action = "createAccount.php" method = "POST">
             <input type="text" id="new-username" name="new-username" placeholder="Username" required><br>
             <input type="email" id="email" name="email" placeholder="Email Address" required><br>
             <input type="password" id="new-password" name="new-password" placeholder="Password" required><br>
