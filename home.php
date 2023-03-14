@@ -15,7 +15,7 @@
         <input type = "text" placeholder = "Type here to search..">
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
-        <a href= "#settings" class = "button"><i class="fa-solid fa-gear"></i></a>
+        <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
     </div>
 <div class = "flex-container">
     <div class = "flex">

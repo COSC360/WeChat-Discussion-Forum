@@ -1,16 +1,15 @@
 <?php
 //Database credentials
 $host = 'localhost';
-$username = 'db_user';
-$password = 'db_password';
-$dbname = 'my_database'; //db name here
+$username = 'root';
+$password = 'rootpw';
+$dbname = 'discussiondatabase'; //db name here
 
 //Create connection
 $conn = mysqli_connect($host, $username, $password, $dbname);
 
-//Check connection
-if (!$conn) {
-    die('Connection failed: ' . mysqli_connect_error());
+if(mysqli_connect_error()) {
+echo "DB Connection error: " . mysqli_error($conn);
+exit();
 }
-echo 'Connected successfully';
 ?>
