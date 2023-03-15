@@ -11,68 +11,7 @@
 </head>
 <body>
     <a href= "home.php" class = "button">Home</a>
-    <section id="login">
-        <h1>Login</h1>
-        <?php
-// Start the session
-session_start();
-
-// Include the database connection file
-include 'connectDB.php';
-
-// Check if the login form has been submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // Get the form data
-    $username = $_POST['username'];
-    $password = $_POST['password'];
-
-    // Query the database to select the user record that matches the inputted username or email
-    $query = "SELECT * FROM users WHERE username = '$username'";
-    $result = mysqli_query($conn, $query);
-
-    // Check if a matching user record was found
-    if ($result && mysqli_num_rows($result) > 0) {
-
-        // Get the user record
-        $user = mysqli_fetch_assoc($result);
-
-        // Verify the password
-        if (password_verify($password, $user['password'])) {
-
-            // Set the user as logged in by creating a session and storing their user ID in the session data
-            $_SESSION['user_id'] = $user['user_id'];
-
-            // Redirect the user to the homepage
-            header('Location: home.php');
-            exit;
-
-        } else {
-            // Display an error message if the password is incorrect
-            echo 'Incorrect password';
-        }
-
-    } else {
-        // Display an error message if no matching user record was found
-        echo 'Invalid username or email';
-    }
-
-}
-
-// Close the database connection
-mysqli_close($conn);
-?>
-
-        <form action = "createAccount.php" method = "POST">
-            <input type="text" id="username" name="username" placeholder="Username" required><br>
-            <input type="password" id="password" name="password" placeholder="Password" required><br>
-            <input type="submit" value="Log in">
-
-        </form>
-        <p>New to WeChat? <a href="#" onclick="CreateAccountPage()">Sign Up</a></p>
-    </section>
-    
-	<section id="create-account" style="display:none"> <!-- dont show create acct yet (hide) until user clicks sign up-->
+	<section id="create-account"> <!-- dont show create acct yet (hide) until user clicks sign up-->
         <h1>Create Account</h1>
          <?php
     // Include the database connection file
@@ -84,10 +23,10 @@ mysqli_close($conn);
         $password = $_POST['new-password'];
 
     // Hash the password
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+     //   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
 
     // Insert the user data into the database
-        $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
+        $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
         $result = mysqli_query($conn, $query);
 
     // Close the database connection
@@ -101,7 +40,7 @@ mysqli_close($conn);
             <input type = "password" id = "confirm-password" name = "confirm-password" placeholder="Confirm Password" required><br>
             <input type="submit" value="Create Account">
         </form>
-        <p>Already have an account? <a href="#" onclick="LoginPage()">Log in</a></p>
+        <p>Already have an account? <a href="login.php">Log in</a></p>
     </section>
     <div id="passwordRules">
         <h3>Password must contain the following:</h3>

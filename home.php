@@ -11,7 +11,7 @@
 <body>
     <div class = "nav">
         <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
+        <a href="login.php" class = "button"> Login</a> 
         <input type = "text" placeholder = "Type here to search..">
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
