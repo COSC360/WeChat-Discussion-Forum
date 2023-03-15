@@ -13,7 +13,57 @@
     <a href= "home.php" class = "button">Home</a>
     <section id="login">
         <h1>Login</h1>
-        <form>
+        <?php
+// Start the session
+session_start();
+
+// Include the database connection file
+include 'connectDB.php';
+
+// Check if the login form has been submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    // Get the form data
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+
+    // Query the database to select the user record that matches the inputted username or email
+    $query = "SELECT * FROM users WHERE username = '$username'";
+    $result = mysqli_query($conn, $query);
+
+    // Check if a matching user record was found
+    if ($result && mysqli_num_rows($result) > 0) {
+
+        // Get the user record
+        $user = mysqli_fetch_assoc($result);
+
+        // Verify the password
+        if (password_verify($password, $user['password'])) {
+
+            // Set the user as logged in by creating a session and storing their user ID in the session data
+            $_SESSION['user_id'] = $user['user_id'];
+
+            // Redirect the user to the homepage
+            header('Location: home.php');
+            exit;
+
+        } else {
+            // Display an error message if the password is incorrect
+            echo 'Incorrect password';
+        }
+
+    } else {
+        // Display an error message if no matching user record was found
+        echo 'Invalid username or email';
+    }
+
+}
+
+// Close the database connection
+mysqli_close($conn);
+?>
+
+        <form action = "createAccount.php" method = "POST">
             <input type="text" id="username" name="username" placeholder="Username" required><br>
             <input type="password" id="password" name="password" placeholder="Password" required><br>
             <input type="submit" value="Log in">
@@ -40,7 +90,7 @@
         $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$hashed_password')";
         $result = mysqli_query($conn, $query);
 
-// Close the database connection
+    // Close the database connection
         mysqli_close($conn);
         }
         ?> 
