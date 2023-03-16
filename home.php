@@ -1,3 +1,15 @@
+<?php
+    
+    session_start();
+    require_once 'connectDB.php';
+    $user = $_SESSION['user_id'];
+    $stmt = $conn->prepare("SELECT * FROM users WHERE user_id=?");
+    $stmt->bind_param("i", $user);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,6 +21,7 @@
     <title>WeChat</title>
 </head>
 <body>
+    <h1> Welcome <?php echo $user['name']; ?></h1>
     <div class = "nav">
         <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
         <a href="createAccount.php" class = "button"> Login</a> 
