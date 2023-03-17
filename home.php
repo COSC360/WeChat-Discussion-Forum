@@ -105,12 +105,13 @@
             <p>Turkey</p>
         </div>
         <div class = "categories">
-            <p style = "color:#A67EF3; font-size: 1.3em;" >Categories</p>
+            <p style = "color:#A67EF3; font-size: 1.3em;" >Communities</p>
             <p>Gaming</p>
             <p>Sports</p>
             <p>Nature</p>
             <p>Business</p>
             <p>More...</p>
+            <a href="createCommunity.php" class = "button">Create</a>
         </div>
       
     </div>

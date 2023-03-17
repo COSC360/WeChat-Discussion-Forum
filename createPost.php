@@ -1,3 +1,21 @@
+<?php
+
+include 'connectDB.php';
+
+if($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $title = $_POST['title'];
+    $community = $_POST['community'];
+    $description = $_POST['description'];
+    $user_id = 6;
+    //user id is placeholder for the user_id of poster
+    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES ('$title', '$description', '$user_id', '$community')";
+    $result = mysqli_query($conn, $query);
+
+    mysqli_close($conn);
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,9 +37,27 @@
     <div class = "flex-create">
         <div class = "createPost">
             <h1 style = "color:#A67EF3; font-size: 1.3em;" >Create Post</h1>
-            <form class = "createPosts" name = "createPosts" onsubmit="return(validate());">
+            <form class = "createPosts" name = "createPosts" method = "post" action = "createPost.php" onsubmit="return(validate());">
                 <input type="text" id="title" name="title" placeholder="Title"><br>
-                <input type ="text" id="community" name = "community" placeholder="Choose Community"><br>
+                <select id="community" name="community">
+        <option value="">Choose Community</option>
+        <?php
+            // Connect to the database
+            include 'connectDB.php';
+            
+            // Get all communities from the database
+            $query = "SELECT * FROM communities";
+            $result = mysqli_query($conn, $query);
+            
+            // Loop through each community and create an option element for the select element
+            while ($row = mysqli_fetch_assoc($result)) {
+                echo "<option value='" . $row['community_id'] . "'>" . $row['community_name'] . "</option>";
+            }
+            
+            // Close the database connection
+            mysqli_close($conn);
+        ?>
+    </select><br>
                 <input type="text" id="description" name="description" placeholder="Description (optional)"><br>
                 <input type="image" name="image" id="image" alt ="Add image"/><br>
                 <input type="submit" value="Post" id="postButton">
