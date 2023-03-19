@@ -39,16 +39,22 @@
         <div class = "scroll">
         <?php 
         require_once 'connectDB.php';
-        $query = "SELECT * FROM posts";
+        require_once "updateScore.php";
+        $query = "SELECT p.*, u.username, c.community_name FROM posts p 
+        INNER JOIN users u ON p.created_by = u.user_id
+        INNER JOIN communities c ON p.community_id = c.community_id";
         $result = mysqli_query($conn, $query);
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<div class = "posts">';
-            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['created_by'].'</p>';
+            echo '<div class = "top">';
+            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
+            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['community_name'].'</p>';
+            echo '</div>';
             echo '<p onclick="redirectToPost();" style="cursor: pointer;">' . $row['title'] . '</p>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
-            echo '<div class="upvote" style="cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>';
-            echo '<div class="downvote" style="cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>';
+            echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';
+            echo '<div class="downvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-down"></i></div>';
             echo '<div class="commentButton" style="cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>';
             echo '</div>';
             echo '</div>';
@@ -56,11 +62,64 @@
         ?>
         
         <script>
-            function redirectToPost(){
-                window.location.href = "viewPost.php";
-            }
+    function redirectToPost(){
+        window.location.href = "viewPost.php";
+    }
 
-        </script>
+    // Get the upvote and downvote buttons
+    const upvoteButtons = document.querySelectorAll('.upvote');
+    const downvoteButtons = document.querySelectorAll('.downvote');
+
+    // Add a click event listener to each upvote button
+    upvoteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const postId = button.dataset.postid;
+            const scoreElement = button.parentNode.querySelector('.postScore');
+
+            // Make an AJAX call to update the post score
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'updateScore.php');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Update the score in the UI
+                    const newScore = JSON.parse(xhr.responseText).newScore;
+                    scoreElement.innerHTML = newScore;
+                    button.classList.add('active');
+                    button.parentNode.querySelector('.downvote').classList.remove('active');
+                } else {
+                    console.error('Error updating score');
+                }
+            };
+            xhr.send(`postId=${postId}&vote=up`);
+        });
+    });
+
+    // Add a click event listener to each downvote button
+    downvoteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const postId = button.dataset.postid;
+            const scoreElement = button.parentNode.querySelector('.postScore');
+
+            // Make an AJAX call to update the post score
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'updateScore.php');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Update the score in the UI
+                    const newScore = JSON.parse(xhr.responseText).newScore;
+                    scoreElement.innerHTML = newScore;
+                    button.classList.add('active');
+                    button.parentNode.querySelector('.upvote').classList.remove('active');
+                } else {
+                    console.error('Error updating score');
+                }
+            };
+            xhr.send(`postId=${postId}&vote=down`);
+        });
+    });
+</script>
     </div>
     </div>
     <div class = "flex-left"> 

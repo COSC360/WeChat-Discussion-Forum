@@ -207,4 +207,8 @@ img {
     border-radius: 5px;
     margin-top:1em;
   }
+  .top {
+    display: inline-block;
+    padding-right: 5em;
+  }
   
