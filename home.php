@@ -55,7 +55,7 @@
             echo '<div class="postScore">' . $row['score'] . '</div>';
             echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';
             echo '<div class="downvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-down"></i></div>';
-            echo '<div class="commentButton" style="cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>';
+            echo '<div class="commentButton" style="cursor: pointer;" onclick="redirectToPost('.$row['post_id'].')"><i class="fa-regular fa-comment"></i></div>';
             echo '</div>';
             echo '</div>';
         }
