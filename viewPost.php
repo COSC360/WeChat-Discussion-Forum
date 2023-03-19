@@ -16,10 +16,33 @@
         <a href= "home.php" class = "button">Home</a>
         <a href= "#settings" class = "button">Settings</a>
     </div>
+    <?php 
+    require_once 'connectDB.php';
+
+    //get post_id from parameter
+    $post_id = $_GET['post_id'];
+
+    //fetching posts and associated user and community name.
+    $query = "SELECT p.*, u.username, c.community_name FROM posts p INNER JOIN users u ON p.created_by = u.user_id 
+    INNER JOIN communities c ON p.community_id = c.community_id
+    WHERE p.post_id = '$post_id'";
+
+    $result = mysqli_query($conn, $query);
+    $post = mysqli_fetch_assoc($result);
+
+    //fetching comments associated with post_id supplied
+    $query = "SELECT c.*, u.username FROM comments c INNER JOIN users u ON c.created_by = u.user_id 
+    WHERE c.post_id = '$post_id'";
+
+    $result = mysqli_query($conn, $query);
+    $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+    ?>
     <div class = "flex-comment">
         <div class = "createPost">
-            <h1 style = "color:#A67EF3; font-size: 1.3em;" >c; Kelowna</h1>
-            <h2 style = "color: #D9D9D9;">What are the best restaurants in Kelowna?</h2>
+            <h1 style = "color:#A67EF3; font-size: 1.3em;" ><?php echo $post['community_name']; ?></h1>
+            <h2 style = "color: #D9D9D9;"><?php echo $post['title']; ?></h2>
+            <h3 style = "color: #D9D9D9;"><?php echo $post['content']; ?></h3>
             <form class = "createcomment">
                 <input type="text" id="commentBox" name="comment" placeholder="Comment"><br>
                 <input type="submit" value="Comment" id="postButton" style = "background-color: #A67EF3;">
@@ -27,29 +50,14 @@
         </div>
     </div>
     <div class = "scroll">
+        
+        <?php foreach ($comments as $comment): ?>
         <div class = "comment">
-            <p style = "color:#A67EF3; font-size: .8em;">User3</p>
-            <p>Chicko chicken is awesome!</p>
+            <p style = "color:#A67EF3; font-size: .8em;"><?php echo $comment['username']; ?></p>
+            <p><?php echo $comment['content']; ?></p>
         </div>
-        <div class = "comment" >
-            <p style = "color:#A67EF3; font-size: .8em;">ben10lover</p>
-            <p>Earls for sure</p>
+        <?php endforeach; ?>
         </div>
-        <div class = "comment" >
-            <p style = "color:#A67EF3; font-size: .8em;">carltonw23</p>
-            <p>The jammery is the best breakfast ive ever had!</p>
-        </div>
-        <div class = "comment" >
-            <p style = "color:#A67EF3; font-size: .8em;">marcuspork</p>
-            <p>The mcdonalds in rutland is great</p>
-        </div>
-        <div class = "comment" >
-            <p style = "color:#A67EF3; font-size: .8em;">cheeseh8ter</p>
-            <p>Does anyone know the name of that vietnamese place downtown?</p>
-        </div>
-    </div>
-    </div>
-    
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

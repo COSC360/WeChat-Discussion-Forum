@@ -50,7 +50,7 @@
             echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
             echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['community_name'].'</p>';
             echo '</div>';
-            echo '<p onclick="redirectToPost();" style="cursor: pointer;">' . $row['title'] . '</p>';
+            echo '<p onclick="redirectToPost('.$row['post_id'].')" style="cursor: pointer;">' . $row['title'] . '</p>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
             echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';
@@ -62,8 +62,8 @@
         ?>
         
         <script>
-    function redirectToPost(){
-        window.location.href = "viewPost.php";
+    function redirectToPost(post_id){
+        window.location.href = "viewPost.php?post_id="+post_id;
     }
 
     // Get the upvote and downvote buttons
