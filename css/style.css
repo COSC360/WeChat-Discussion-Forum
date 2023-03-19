@@ -59,10 +59,6 @@ div.scroll{
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
-    margin:1em;
-    padding: 1em;
-    padding-left: 9em;
-    padding-right: 6em;
 }
 .popular{
     color: rgb(160, 158, 158);
@@ -193,3 +189,22 @@ img {
 .active{
     color: #A67EF3;
 }
+/* Set max height for community-container */
+.community-container {
+    max-height: 50em;
+    overflow-y: auto; /* add vertical scrollbar if content overflows */
+  }
+  
+  /* Display each community block as a separate element */
+  .communities {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 10px;
+    padding: 10px;
+    color: rgb(160, 158, 158);
+    border: solid #262D34;
+    background-color: #262D34;
+    border-radius: 5px;
+    margin-top:1em;
+  }
+  

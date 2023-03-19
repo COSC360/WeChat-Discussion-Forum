@@ -1,4 +1,4 @@
-<?php
+<!--<?php
     
     session_start();
     require_once 'connectDB.php';
@@ -10,6 +10,7 @@
     $user = $result->fetch_assoc();
 
 ?>
+-->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +22,6 @@
     <title>WeChat</title>
 </head>
 <body>
-    <h1> Welcome <?php echo $user['name']; ?></h1>
     <div class = "nav">
         <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
         <a href="createAccount.php" class = "button"> Login</a> 
@@ -33,7 +33,6 @@
 <div class = "flex-container">
     <div class = "flex">
         <div class = "createPost">
-            <input class = "postInp" type = "text" placeholder="Click post to share your thoughts">
             <a href="createPost.php" class = "button">Post</a>
         </div>
         <div class = "scroll">
@@ -105,7 +104,7 @@
             <p>Turkey</p>
         </div>
         <div class = "categories">
-            <p style = "color:#A67EF3; font-size: 1.3em;" >Communities</p>
+            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="community.php" >Communities</a></p>
             <p>Gaming</p>
             <p>Sports</p>
             <p>Nature</p>
