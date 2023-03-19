@@ -37,20 +37,32 @@
     $result = mysqli_query($conn, $query);
     $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
+    if(isset($_POST['comment'])) {
+        $comment = $_POST['comment'];
+        $created_by = 6;
+        $created_at = date('Y-m-d H:i:s');
+
+        $query = "INSERT INTO comments (content, created_by, created_at, post_id) VALUES ('$comment', '$created_by', '$created_at', '$post_id')";
+        mysqli_query($conn, $query);
+        
+        header("Location: viewPost.php?post_id=$post_id");
+        exit();
+    }
+
     ?>
     <div class = "flex-comment">
         <div class = "createPost">
             <h1 style = "color:#A67EF3; font-size: 1.3em;" ><?php echo $post['community_name']; ?></h1>
             <h2 style = "color: #D9D9D9;"><?php echo $post['title']; ?></h2>
             <h3 style = "color: #D9D9D9;"><?php echo $post['content']; ?></h3>
-            <form class = "createcomment">
+            <form class = "createcomment" action="viewPost.php?post_id=<?php echo $post_id; ?>" method="post" onsubmit = "return validateComment();">
                 <input type="text" id="commentBox" name="comment" placeholder="Comment"><br>
                 <input type="submit" value="Comment" id="postButton" style = "background-color: #A67EF3;">
             </form>
         </div>
     </div>
     <div class = "scroll">
-        
+        <!-- displaying comments -->
         <?php foreach ($comments as $comment): ?>
         <div class = "comment">
             <p style = "color:#A67EF3; font-size: .8em;"><?php echo $comment['username']; ?></p>
@@ -58,6 +70,18 @@
         </div>
         <?php endforeach; ?>
         </div>
+
+        <script>
+            //checks if there is content in the comment box
+            function validateComment() {
+                var commentBox = document.getElementById("commentBox");
+                if(commentBox.value.trim() == "") {
+                    alert("Enter comment to submit");
+                    return false;
+                }
+                return true;
+            }
+            </script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>
