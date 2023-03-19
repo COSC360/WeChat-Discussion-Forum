@@ -30,63 +30,31 @@
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
     </div>
+
 <div class = "flex-container">
     <div class = "flex">
         <div class = "createPost">
             <a href="createPost.php" class = "button">Post</a>
         </div>
         <div class = "scroll">
-        <div class = "posts" id = "post1">
-            <p style = "color:#A67EF3; font-size: .8em;">User3</p>
-            <p onclick="redirectToPost();" style = "cursor: pointer;">What are the best restaurants in Kelowna?</p>
-            <div class = "postContainer">
-            <div class = "postScore">10</div>
-            <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
-            <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
-            <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
-        </div>
-        </div>
-        <div class = "posts" id = "post2">
-            <p style = "color:#A67EF3; font-size: .8em;">ben10lover</p>
-            <p onclick="redirectToPost();" style = "cursor: pointer;">How do I center a div using css? </p>
-            <div class = "postContainer">
-                <div class = "postScore">10</div>
-                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
-                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
-                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
-            </div>    
-        </div>
-        <div class = "posts" id = "post3" >
-            <p style = "color:#A67EF3; font-size: .8em;">carltonw23</p>
-            <p onclick="redirectToPost();" style = "cursor: pointer;">Today I woke up, ate breakfast and went to class</p>
-            <div class = "postContainer">
-                <div class = "postScore">10</div>
-                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
-                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
-                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
-            </div>    
-        </div>
-        <div class = "posts" id = "post4">
-            <p style = "color:#A67EF3; font-size: .8em;">marcuspork</p>
-            <p onclick="redirectToPost();" style = "cursor: pointer;">Sunset!</p>
-            <img src = "images/19223285_web1_191104-KCN-Sunet-Photos.jpg" alt = "sunset">
-            <div class = "postContainer">
-                <div class = "postScore">10</div>
-                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
-                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
-                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
-            </div>    
-        </div>
-        <div class = "posts" id = "post5">
-            <p style = "color:#A67EF3; font-size: .8em;">cheeseh8ter</p>
-            <p onclick="redirectToPost();" style = "cursor: pointer;">How to improve at Baseball?</p>
-            <div class = "postContainer">
-                <div class = "postScore">10</div>
-                <div class = "upvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>
-                <div class = "downvote" style = "cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>
-                <div class = "commentButton" style = "cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>
-            </div>    
-        </div>
+        <?php 
+        require_once 'connectDB.php';
+        $query = "SELECT * FROM posts";
+        $result = mysqli_query($conn, $query);
+        while ($row = mysqli_fetch_assoc($result)) {
+            echo '<div class = "posts">';
+            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['created_by'].'</p>';
+            echo '<p onclick="redirectToPost();" style="cursor: pointer;">' . $row['title'] . '</p>';
+            echo '<div class="postContainer">';
+            echo '<div class="postScore">' . $row['score'] . '</div>';
+            echo '<div class="upvote" style="cursor: pointer;"><i class="fa-solid fa-arrow-up"></i></div>';
+            echo '<div class="downvote" style="cursor: pointer;"><i class="fa-solid fa-arrow-down"></i></div>';
+            echo '<div class="commentButton" style="cursor: pointer;" onclick="redirectToPost();"><i class="fa-regular fa-comment"></i></div>';
+            echo '</div>';
+            echo '</div>';
+        }
+        ?>
+        
         <script>
             function redirectToPost(){
                 window.location.href = "viewPost.php";
