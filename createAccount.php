@@ -1,3 +1,35 @@
+<?php
+session_start();
+require 'connectDB.php';
+if(!empty($_SESSION["user_id"])){
+    header("Location: home.php");
+}
+if(isset($_POST["submit"])){
+    $username = $_POST['new-username'];
+    $email = $_POST['email'];
+    $password = $_POST['new-password'];
+    $confirmPassword = $_POST['confirm-password'];
+    $duplicate = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' OR email = '$email'");
+    if(mysqli_num_rows($duplicate)> 0){
+        echo 
+        "<script>
+            alert('Username or email already exists');</script>";
+    }else{
+        if($password == $confirmPassword){
+            // $password = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
+            $result = mysqli_query($conn, $query);
+            echo 
+                "<script>
+                    alert('Account created successfully');</script>";    
+    }else{
+             echo 
+                "<script>
+                    alert('Password does not match');</script>";
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,40 +39,20 @@
     <link rel = "stylesheet" href = "css/login.css">
     <link rel = "stylesheet" href = "css/style.css">
     
-    <title>Login & Create Account</title>
+    <title>Create Account</title>
 </head>
 <body>
-    <a href= "home.php" class = "button">Home</a>
+<a href = "home.php" class = "button">Home</a>
 	<section id="create-account"> <!-- dont show create acct yet (hide) until user clicks sign up-->
         <h1>Create Account</h1>
-         <?php
-    // Include the database connection file
-        include 'connectDB.php';
-        if($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Get the form data
-        $username = $_POST['new-username'];
-        $email = $_POST['email'];
-        $password = $_POST['new-password'];
 
-            // Hash the password
-     //   $hashed_password = password_hash($password, PASSWORD_DEFAULT);
-
-    // Insert the user data into the database
-        $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
-        $result = mysqli_query($conn, $query);
-
-        header('location: login.php');
-
-    // Close the database connection
-        mysqli_close($conn);
-        }
-        ?> 
-        <form action = "createAccount.php" method = "POST">
-            <input type="text" id="new-username" name="new-username" placeholder="Username" required><br>
-            <input type="email" id="email" name="email" placeholder="Email Address" required><br>
-            <input type="password" id="new-password" name="new-password" placeholder="Password" required><br>
-            <input type = "password" id = "confirm-password" name = "confirm-password" placeholder="Confirm Password" required><br>
-            <input type="submit" value="Create Account">
+        <form action = "" method = "POST" autocomplete = "off">
+            <input type="text" id="new-username" name="new-username" placeholder="Username" required value = ""><br>
+            <input type="email" id="email" name="email" placeholder="Email Address" required value = ""><br>
+            <input type="password" id="new-password" name="new-password" placeholder="Password" required value= ""><br>
+            <input type = "password" id = "confirm-password" name = "confirm-password" placeholder="Confirm Password" required value = ""><br>
+            <!-- <input type="submit" value="Create Account"> -->
+            <button class = "button" type="submit" name="submit">Create Account</button>
         </form>
         <p>Already have an account? <a href="login.php">Log in</a></p>
     </section>
