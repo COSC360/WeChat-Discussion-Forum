@@ -131,7 +131,7 @@
             <p>Turkey</p>
         </div>
         <div class = "categories">
-            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="community.php" >Communities</a></p>
+            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="communityList.php" >Communities</a></p>
             <p>Gaming</p>
             <p>Sports</p>
             <p>Nature</p>
