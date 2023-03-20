@@ -1,3 +1,35 @@
+<?php
+session_start();
+require 'connectDB.php';
+if(!empty($_SESSION["user_id"])){
+    header("Location: home.php");
+}
+if(isset($_POST["submit"])){
+    $username = $_POST['username'];
+    $password = $_POST['password'];
+    $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' and password = '$password'");
+    $row = mysqli_fetch_assoc($result);
+    if(mysqli_num_rows($result) > 0){
+        if($password == $row['password']){
+            // $_SESSION["login"]=true;
+            $_SESSION["username"] = $row['username'];
+            $_SESSION["user_id"]= $row["user_id"];
+            header("Location: home.php" );
+        }else{
+            echo
+            "<script>
+                alert('Oops, Wrong Password');</script>";
+        }
+    
+        }else{
+            echo 
+            "<script>
+                alert('Sorry, user is not registered');</script>";
+        }
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,70 +39,21 @@
     <link rel = "stylesheet" href = "css/login.css">
     <link rel = "stylesheet" href = "css/style.css">
     
-    <title>Login & Create Account</title>
+    <title>Login</title>
 </head>
 <body>
 <a href= "home.php" class = "button">Home</a>
 <section id="login">
         <h1>Login</h1>
-        <?php
-// Start the session
-session_start();
 
-// Include the database connection file
-include 'connectDB.php';
-
-// Check if the login form has been submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
-    // Get the form data
-    $username = mysqli_real_escape_string($conn, $_POST['username']);
-    $password = $_POST['password'];
-
-    // Query the database using prepared statement to select the user record that matches the inputted username or email
-    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE username = ?");
-    mysqli_stmt_bind_param($stmt, "s", $username);
-    mysqli_stmt_execute($stmt);
-    $result = mysqli_stmt_get_result($stmt);
-
-    // Check if a matching user record was found
-    if ($result && mysqli_num_rows($result) > 0) {
-
-        // Get the user record
-        $user = mysqli_fetch_assoc($result);
-
-        // Verify the password
-        if (password_verify($password, $user['password'])) {
-
-            // Set the user as logged in by creating a session and storing their user ID in the session data
-            $_SESSION['user_id'] = $user['user_id'];
-
-            // Redirect the user to the homepage
-            header('location: home.php');
-            exit();
-
-        } else {
-            // Display an error message if the password is incorrect
-            $error = 'Incorrect password';
-        }
-
-    } else {
-        // Display an error message if no matching user record was found
-        $error = 'Invalid username or email';
-    }
-
-}
-
-// Close the database connection
-mysqli_close($conn);
-?>
-
-<form action = "login.php" method = "POST">
+<form action = "" method = "POST" autocomplete = "off">
     <input type="text" id="username" name="username" placeholder="Username" required><br>
     <input type="password" id="password" name="password" placeholder="Password" required><br>
-    <input type="submit" value="Log in">
+    <!-- <input type="submit" value="Log in"> -->
+
+    <button class = "button" type="submit" name="submit">Log in</button>
 </form>
-        <p>New to WeChat? <a href="createAccount.php">Sign Up</a></p>
+     <p>New to WeChat? <a href="createAccount.php">Sign Up</a></p>
     </section>
 
     <!--

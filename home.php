@@ -1,16 +1,20 @@
-<!--<?php
-    
-    session_start();
-    require_once 'connectDB.php';
-    $user = $_SESSION['user_id'];
-    $stmt = $conn->prepare("SELECT * FROM users WHERE user_id=?");
-    $stmt->bind_param("i", $user);
-    $stmt->execute();
-    $result = $stmt->get_result();
-    $user = $result->fetch_assoc();
+<?php
+// session_start();
+// require 'connectDB.php';
+// if(!empty($_SESSION["user_id"])){
+//     $user_id = $_SESSION["user_id"];
+//     $result = mysqli_query($conn, "SELECT * FROM users WHERE user_id = $user_id");
+//     $row = mysqli_fetch_assoc($result);
+// }else{
+//     header("Location: login.php");
+// }
+
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
 
 ?>
--->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,6 +26,8 @@
     <title>WeChat</title>
 </head>
 <body>
+    <h1>Welcome <?php echo $_SESSION["username"]; ?></h1>
+    
     <div class = "nav">
         <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
         <a href="createAccount.php" class = "button"> Login</a> 
@@ -29,6 +35,7 @@
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
+        <a href = "logout.php" class = "button">Logout</a>
     </div>
 
 <div class = "flex-container">
