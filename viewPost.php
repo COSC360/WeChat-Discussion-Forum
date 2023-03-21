@@ -17,6 +17,11 @@
         <a href= "#settings" class = "button">Settings</a>
     </div>
     <?php 
+    session_start();
+    if(empty($_SESSION["user_id"])){
+        header("Location: login.php");
+    }
+    
     require_once 'connectDB.php';
 
     //get post_id from parameter
@@ -39,7 +44,7 @@
 
     if(isset($_POST['comment'])) {
         $comment = $_POST['comment'];
-        $created_by = 6;
+        $created_by = $_SESSION['user_id'];
         $created_at = date('Y-m-d H:i:s');
 
         $query = "INSERT INTO comments (content, created_by, created_at, post_id) VALUES ('$comment', '$created_by', '$created_at', '$post_id')";
