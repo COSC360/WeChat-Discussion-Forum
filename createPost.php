@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+
+
 include 'connectDB.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -7,9 +13,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $community = $_POST['community'];
     $description = $_POST['description'];
-    $user_id = 6;
+    $username = $_SESSION['user_id'];
     //user id is placeholder for the user_id of poster
-    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES ('$title', '$description', '$user_id', '$community')";
+    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES ('$title', '$description', '$username', '$community')";
     $result = mysqli_query($conn, $query);
 
     mysqli_close($conn);
