@@ -1,3 +1,10 @@
+<?php
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -30,7 +37,10 @@
             echo '<p style="color:#A67EF3; font-size: 1.6em;">' . $row['community_id'] . '</p>';
             echo '<a href="community.php?community_id=' . $row['community_id'] . '" style="font-size: 1.5em;">' . $row['community_name'] . '</a>';
             echo '<div class="postContainer">';
-            echo '<div style="font-size: 1.2em;" class="button">Join</div>';
+            echo '<form method="POST" action="joinCommunity.php">';
+            echo '<input type="hidden" name="community_id" value="' . $row['community_id'] . '">';
+            echo '<input type = "submit" value = "Join" name = "join" style="font-size: 1.2em;" class="button"</input>';
+            echo '</form>';
             echo '</div>';
             echo '</div>';
         }
