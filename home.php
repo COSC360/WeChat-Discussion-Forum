@@ -148,7 +148,7 @@ if(empty($_SESSION["user_id"])){
             <?php 
             require_once 'connectDB.php';
             $user_id = $_SESSION['user_id'];
-            $query = "SELECT c.community_name FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id'";
+            $query = "SELECT c.community_name FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id' LIMIT 7";
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_assoc($result)) {
             echo '<p>'.$row['community_name'].'</p>';
