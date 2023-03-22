@@ -1,3 +1,9 @@
+<?php
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+?>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -8,13 +14,19 @@
     <title>WeChat</title>
 </head>
 <body>
-    <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
-        <input type = "text" placeholder = "Type here to search..">
+<div class = "nav">
+        <a href="viewAccount.php" class = "button">usr</a> 
+        <a href="createAccount.php" class = "button"> Login</a>
+        <div class = "search-container"> 
+            <form method = "GET">
+                <input type = "text" name = "search" placeholder = "Type here to search..">
+                <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
+        <a href = "logout.php" class = "button">Logout</a>
     </div>
     <div class="createCommunity">
         <a href="createCommunity.php" class="button">Create Community</a>
@@ -29,6 +41,7 @@
         $query = "SELECT community_id, community_name, description FROM communities WHERE community_id = $community_id";
         $result = mysqli_query($conn, $query);
         while($row = mysqli_fetch_assoc($result)) {
+        
             echo '<div class="communities">';
             echo '<p style="color:#A67EF3; font-size: 1.6em;">'.$row['community_id'].'</p>';
             echo '<p style="font-size: 1.5em;">'.$row['community_name'].'</p>';

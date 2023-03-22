@@ -1,8 +1,15 @@
+<?php
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
 	<title>User Overview - Reddit Clone</title>
+	<script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
 	<link rel="stylesheet" href="css/viewAcc.css">
     <link rel = "stylesheet" href = "css/style.css">
 </head>

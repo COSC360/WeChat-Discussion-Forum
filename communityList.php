@@ -24,13 +24,19 @@ if(empty($_SESSION["user_id"])){
   </style>
 </head>
 <body>
-    <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
-        <input type = "text" placeholder = "Type here to search..">
+<div class = "nav">
+        <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
+        <a href="createAccount.php" class = "button"> Login</a>
+        <div class = "search-container"> 
+            <form method = "GET">
+                <input type = "text" name = "search" placeholder = "Type here to search..">
+                <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
+        <a href = "logout.php" class = "button">Logout</a>
     </div>
     <div class="createCommunity">
         <a href="createCommunity.php" class="button">Create Community</a>
