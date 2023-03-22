@@ -131,19 +131,29 @@ if(empty($_SESSION["user_id"])){
     </div>
     <div class = "flex-left"> 
         <div class = "popular">
-            <p style = "color:#A67EF3; font-size: 1.3em;" >Popular</p>
-            <p>Manchester United</p>
-            <p>Call of Duty</p>
-            <p>Cats</p>
-            <p>Turkey</p>
+            <?php 
+            require_once 'connectDB.php';
+            $query = 'SELECT c.community_name, COUNT(u.user_id) as numJoined FROM communities c JOIN user_community u
+             ON c.community_id = u.community_id GROUP BY c.community_id ORDER BY numJoined DESC
+            LIMIT 5';
+            $result = mysqli_query($conn, $query);
+            echo '<p style = "color:#A67EF3; font-size: 1.3em;" >Top Communities</p>';
+            while($row = mysqli_fetch_assoc($result)) {
+            echo '<p>'.$row['community_name'].'</p>';
+            }
+             ?>
         </div>
         <div class = "categories">
             <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="communityList.php" >Communities</a></p>
-            <p>Gaming</p>
-            <p>Sports</p>
-            <p>Nature</p>
-            <p>Business</p>
-            <p>More...</p>
+            <?php 
+            require_once 'connectDB.php';
+            $user_id = $_SESSION['user_id'];
+            $query = "SELECT c.community_name FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id'";
+            $result = mysqli_query($conn, $query);
+            while($row = mysqli_fetch_assoc($result)) {
+            echo '<p>'.$row['community_name'].'</p>';
+            }
+             ?>
             <a href="createCommunity.php" class = "button">Create</a>
         </div>
       
