@@ -13,7 +13,29 @@ session_start();
 if(empty($_SESSION["user_id"])){
     header("Location: login.php");
 }
+?>
 
+<!-- php code for search functionality -->
+<?php 
+require_once 'connectDB.php';
+require_once "updateScore.php";
+
+if(isset($_GET['submit'])) {
+$search_term = mysqli_real_escape_string($conn, $_GET['search']);
+//query that checks search term using LIKE
+$query = "SELECT p.*, u.username, c.community_name FROM posts p 
+INNER JOIN users u ON p.created_by  = u.user_id
+INNER JOIN communities c on p.community_id = c.community_id
+WHERE p.title LIKE '%$search_term%'
+OR c.community_name LIKE '%$search_term%'
+OR u.username LIKE '%$search_term%'";
+} else {
+//query to show all posts
+$query = "SELECT p.*, u.username, c.community_name FROM posts p 
+INNER JOIN users u ON p.created_by = u.user_id
+INNER JOIN communities c ON p.community_id = c.community_id";
+}
+$result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,8 +50,13 @@ if(empty($_SESSION["user_id"])){
 <body>
     <div class = "nav">
         <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
-        <input type = "text" placeholder = "Type here to search..">
+        <a href="createAccount.php" class = "button"> Login</a>
+        <div class = "search-container"> 
+            <form method = "GET">
+                <input type = "text" name = "search" placeholder = "Type here to search..">
+                <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
@@ -43,12 +70,7 @@ if(empty($_SESSION["user_id"])){
         </div>
         <div class = "scroll">
         <?php 
-        require_once 'connectDB.php';
-        require_once "updateScore.php";
-        $query = "SELECT p.*, u.username, c.community_name FROM posts p 
-        INNER JOIN users u ON p.created_by = u.user_id
-        INNER JOIN communities c ON p.community_id = c.community_id";
-        $result = mysqli_query($conn, $query);
+        
         while ($row = mysqli_fetch_assoc($result)) {
             $community_name = $row['community_name'];
             $community_id = $row['community_id'];
