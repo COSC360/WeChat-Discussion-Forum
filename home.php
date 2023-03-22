@@ -26,10 +26,8 @@ if(empty($_SESSION["user_id"])){
     <title>WeChat</title>
 </head>
 <body>
-    <h1>Welcome <?php echo $_SESSION["username"]; ?></h1>
-    
     <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
+        <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
         <a href="createAccount.php" class = "button"> Login</a> 
         <input type = "text" placeholder = "Type here to search..">
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
@@ -54,17 +52,19 @@ if(empty($_SESSION["user_id"])){
         while ($row = mysqli_fetch_assoc($result)) {
             $community_name = $row['community_name'];
             $community_id = $row['community_id'];
+            $title = $row['title'];
+            $post_id = $row['post_id'];
             echo '<div class = "posts">';
             echo '<div class = "top">';
             echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
             echo '<p style = "color:#A67EF3; font-size: .8em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</div>';
-            echo '<p onclick="redirectToPost('.$row['post_id'].')" style="cursor: pointer;">' . $row['title'] . '</p>';
+            echo '<a href = "viewPost.php?post_id='.$post_id.'">'.$title.'</a>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
             echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';
             echo '<div class="downvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-down"></i></div>';
-            echo '<div class="commentButton" style="cursor: pointer;" onclick="redirectToPost('.$row['post_id'].')"><i class="fa-regular fa-comment"></i></div>';
+            echo '<a href="viewPost.php?post_id='.$post_id.'" class="commentButton" style="cursor: pointer;"><i class="fa-regular fa-comment"></i></a>';
             echo '</div>';
             echo '</div>';
         }

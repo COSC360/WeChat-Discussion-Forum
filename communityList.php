@@ -13,6 +13,15 @@ if(empty($_SESSION["user_id"])){
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeChat</title>
+    <style>   a {
+    color: #A67EF3;; /* set the default link color */
+    text-decoration: none; /* remove the underline */
+  }
+  
+  a:hover {
+    color: #fbeee0; /* set the link color when hovering over it */
+  }
+  </style>
 </head>
 <body>
     <div class = "nav">

@@ -211,4 +211,13 @@ img {
     display: inline-block;
     padding-right: 5em;
   }
+  a {
+    color: #A67EF3;; /* set the default link color */
+    text-decoration: none; /* remove the underline */
+  }
+  
+  a:hover {
+    color: #fbeee0; /* set the link color when hovering over it */
+  }
+  
   
