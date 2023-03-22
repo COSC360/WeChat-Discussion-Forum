@@ -52,10 +52,12 @@ if(empty($_SESSION["user_id"])){
         INNER JOIN communities c ON p.community_id = c.community_id";
         $result = mysqli_query($conn, $query);
         while ($row = mysqli_fetch_assoc($result)) {
+            $community_name = $row['community_name'];
+            $community_id = $row['community_id'];
             echo '<div class = "posts">';
             echo '<div class = "top">';
             echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
-            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['community_name'].'</p>';
+            echo '<p style = "color:#A67EF3; font-size: .8em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</div>';
             echo '<p onclick="redirectToPost('.$row['post_id'].')" style="cursor: pointer;">' . $row['title'] . '</p>';
             echo '<div class="postContainer">';
@@ -91,7 +93,7 @@ if(empty($_SESSION["user_id"])){
                 if (xhr.status === 200) {
                     // Update the score in the UI
                     const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore;
+                    scoreElement.innerHTML = newScore; ,
                     button.classList.add('active');
                     button.parentNode.querySelector('.downvote').classList.remove('active');
                 } else {
@@ -133,13 +135,15 @@ if(empty($_SESSION["user_id"])){
         <div class = "popular">
             <?php 
             require_once 'connectDB.php';
-            $query = 'SELECT c.community_name, COUNT(u.user_id) as numJoined FROM communities c JOIN user_community u
+            $query = 'SELECT c.community_name, u.community_id, COUNT(u.user_id)as numJoined FROM communities c JOIN user_community u
              ON c.community_id = u.community_id GROUP BY c.community_id ORDER BY numJoined DESC
             LIMIT 5';
             $result = mysqli_query($conn, $query);
             echo '<p style = "color:#A67EF3; font-size: 1.3em;" >Top Communities</p>';
             while($row = mysqli_fetch_assoc($result)) {
-            echo '<p>'.$row['community_name'].'</p>';
+            $community_id = $row['community_id'];
+            $community_name = $row['community_name'];
+            echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             }
              ?>
         </div>
@@ -148,10 +152,12 @@ if(empty($_SESSION["user_id"])){
             <?php 
             require_once 'connectDB.php';
             $user_id = $_SESSION['user_id'];
-            $query = "SELECT c.community_name FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id' LIMIT 7";
+            $query = "SELECT c.community_name, u.community_id FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id' LIMIT 7";
             $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_assoc($result)) {
-            echo '<p>'.$row['community_name'].'</p>';
+            $community_id = $row['community_id'];
+            $community_name = $row['community_name'];
+            echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             }
              ?>
             <a href="createCommunity.php" class = "button">Create</a>
