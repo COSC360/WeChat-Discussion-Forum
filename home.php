@@ -1,18 +1,5 @@
 <?php
-// session_start();
-// require 'connectDB.php';
-// if(!empty($_SESSION["user_id"])){
-//     $user_id = $_SESSION["user_id"];
-//     $result = mysqli_query($conn, "SELECT * FROM users WHERE user_id = $user_id");
-//     $row = mysqli_fetch_assoc($result);
-// }else{
-//     header("Location: login.php");
-// }
-
 session_start();
-if(empty($_SESSION["user_id"])){
-    header("Location: login.php");
-}
 ?>
 
 <!-- php code for search functionality -->
@@ -49,7 +36,7 @@ $result = mysqli_query($conn, $query);
 </head>
 <body>
     <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
+        <a href="viewAccount.php" class = "button"> <?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
         <a href="createAccount.php" class = "button"> Login</a>
         <div class = "search-container"> 
             <form method = "GET">
@@ -173,6 +160,7 @@ $result = mysqli_query($conn, $query);
             <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="communityList.php" >Communities</a></p>
             <?php 
             require_once 'connectDB.php';
+            if(isset($_SESSION['user_id'])) {
             $user_id = $_SESSION['user_id'];
             $query = "SELECT c.community_name, u.community_id FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id' LIMIT 7";
             $result = mysqli_query($conn, $query);
@@ -181,6 +169,9 @@ $result = mysqli_query($conn, $query);
             $community_name = $row['community_name'];
             echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             }
+        } else {
+            echo '<p> Login To Join Communities </p>';
+        }
              ?>
             <a href="createCommunity.php" class = "button">Create</a>
         </div>

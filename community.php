@@ -1,8 +1,5 @@
 <?php
 session_start();
-if(empty($_SESSION["user_id"])){
-    header("Location: login.php");
-}
 ?>
 <html lang="en">
 <head>
@@ -15,7 +12,7 @@ if(empty($_SESSION["user_id"])){
 </head>
 <body>
 <div class = "nav">
-        <a href="viewAccount.php" class = "button">usr</a> 
+        <a href="viewAccount.php" class = "button"><?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
         <a href="createAccount.php" class = "button"> Login</a>
         <div class = "search-container"> 
             <form method = "GET">
