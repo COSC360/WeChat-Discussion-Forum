@@ -28,7 +28,7 @@ if(empty($_SESSION["user_id"])){
         <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
         <a href="createAccount.php" class = "button"> Login</a>
         <div class = "search-container"> 
-            <form method = "GET">
+            <form method = "POST">
                 <input type = "text" name = "search" placeholder = "Type here to search..">
                 <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
@@ -46,6 +46,11 @@ if(empty($_SESSION["user_id"])){
         include_once 'connectDB.php';
 
         $query = "SELECT community_id, community_name FROM communities";
+         // check if search query has been submitted
+     if(isset($_POST['submit'])) {
+        $search = $_POST['search'];
+        $query .= " WHERE community_name LIKE '%$search%'";
+    } 
         $result = mysqli_query($conn, $query);
         while ($row = mysqli_fetch_assoc($result)) {
             echo '<div class="communities">';
