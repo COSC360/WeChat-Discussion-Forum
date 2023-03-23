@@ -19,7 +19,7 @@ if(empty($_SESSION["user_id"])){
         <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
         <a href="createAccount.php" class = "button"> Login</a>
         <div class = "search-container"> 
-            <form method = "GET">
+            <form method = "POST">
                 <input type = "text" name = "search" placeholder = "Type here to search..">
                 <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
@@ -41,12 +41,18 @@ if(empty($_SESSION["user_id"])){
     INNER JOIN communities c ON p.community_id = c.community_id
     WHERE p.post_id = '$post_id'";
 
-    $result = mysqli_query($conn, $query);
-    $post = mysqli_fetch_assoc($result);
+        $result = mysqli_query($conn, $query);
+        $post = mysqli_fetch_assoc($result);
 
-    //fetching comments associated with post_id supplied
+   
     $query = "SELECT c.*, u.username FROM comments c INNER JOIN users u ON c.created_by = u.user_id 
     WHERE c.post_id = '$post_id'";
+
+     // check if search query has been submitted
+     if(isset($_POST['submit'])) {
+        $search = $_POST['search'];
+        $query .= " AND u.username LIKE '%$search%' OR c.content LIKE '%$search%'";
+    } 
 
     $result = mysqli_query($conn, $query);
     $comments = mysqli_fetch_all($result, MYSQLI_ASSOC);

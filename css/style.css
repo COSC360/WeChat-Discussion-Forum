@@ -228,11 +228,12 @@ img {
     align-items: center;
   }
  .search-container input[type="text"] {
-    width: 100%;
+    width: 150%;
     padding: 10px;
+    padding-right: 5em;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 11px;
   }
   .search-container button[type="submit"] {
     width: 25%;
