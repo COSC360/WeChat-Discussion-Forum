@@ -81,7 +81,7 @@ $result = mysqli_query($conn, $query);
             echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
             echo '<p style = "color:#A67EF3; font-size: .8em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</div>';
-            echo '<a href = "viewPost.php?post_id='.$post_id.'">'.$title.'</a>';
+            echo '<a href="viewPost.php?post_id='.$post_id.'">'.$title.'</a>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
             echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';

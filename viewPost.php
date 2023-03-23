@@ -51,7 +51,7 @@ if(empty($_SESSION["user_id"])){
      // check if search query has been submitted
      if(isset($_POST['submit'])) {
         $search = $_POST['search'];
-        $query .= " AND u.username LIKE '%$search%' OR c.content LIKE '%$search%'";
+        $query .= " AND (u.username LIKE '%$search%' OR c.content LIKE '%$search%')";
     } 
 
     $result = mysqli_query($conn, $query);
@@ -84,11 +84,16 @@ if(empty($_SESSION["user_id"])){
     <div class = "scroll">
         <!-- displaying comments -->
         <?php foreach ($comments as $comment): ?>
-        <div class = "comment">
-            <p style = "color:#A67EF3; font-size: .8em;"><?php echo $comment['username']; ?></p>
-            <p><?php echo $comment['content']; ?></p>
+    <div class="comment">
+        <p style="color:#A67EF3; font-size: .8em;"><?php echo $comment['username']; ?></p>
+        <p><?php echo $comment['content']; ?></p>
+        <div class="postContainer">
+            <div class="postScore"><?php echo $comment['comment_score']; ?></div>
+            <div class="upvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-up"></i></div>
+            <div class="downvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-down"></i></div>
         </div>
-        <?php endforeach; ?>
+    </div>
+    <?php endforeach; ?>
         </div>
 
         <script>
@@ -101,6 +106,60 @@ if(empty($_SESSION["user_id"])){
                 }
                 return true;
             }
+
+            // Get the upvote and downvote buttons
+    const upvoteButtons = document.querySelectorAll('.upvote');
+    const downvoteButtons = document.querySelectorAll('.downvote');
+
+    // Add a click event listener to each upvote button
+    upvoteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const comment_id = button.getAttribute('comment_id');
+            const scoreElement = button.parentNode.querySelector('.postScore');
+
+            // Make an AJAX call to update the post score
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'updateCommentScore.php');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Update the score in the UI
+                    const newScore = JSON.parse(xhr.responseText).newScore;
+                    scoreElement.innerHTML = newScore; 
+                    button.classList.add('active');
+                    button.parentNode.querySelector('.downvote').classList.remove('active');
+                } else {
+                    console.error('Error updating score');
+                }
+            };
+            xhr.send(`comment_id=${comment_id}&vote=up`);
+        });
+    });
+
+    // Add a click event listener to each downvote button
+    downvoteButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            const comment_id = button.getAttribute('comment_id');
+            const scoreElement = button.parentNode.querySelector('.postScore');
+
+            // Make an AJAX call to update the post score
+            const xhr = new XMLHttpRequest();
+            xhr.open('POST', 'updateCommentScore.php');
+            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+            xhr.onload = function() {
+                if (xhr.status === 200) {
+                    // Update the score in the UI
+                    const newScore = JSON.parse(xhr.responseText).newScore;
+                    scoreElement.innerHTML = newScore;
+                    button.classList.add('active');
+                    button.parentNode.querySelector('.upvote').classList.remove('active');
+                } else {
+                    console.error('Error updating score');
+                }
+            };
+            xhr.send(`comment_id=${comment_id}&vote=down`);
+        });
+    });
             </script>
 </body>
 <footer>
