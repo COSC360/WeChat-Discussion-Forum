@@ -218,4 +218,39 @@ img {
     display: inline-block;
     padding-right: 5em;
   }
+  a {
+    color: #A67EF3; /* set the default link color */
+    text-decoration: none; /* remove the underline */
+  }
+  
+  a:hover {
+    color: #fbeee0; /* set the link color when hovering over it */
+  }
+  .search-container{
+    display: flex;
+    align-items: center;
+  }
+  .search-container form {
+    display: flex;
+    align-items: center;
+  }
+ .search-container input[type="text"] {
+    width: 150%;
+    padding: 10px;
+    padding-right: 5em;
+    border: none;
+    border-radius: 5px;
+    font-size: 11px;
+  }
+  .search-container button[type="submit"] {
+    width: 25%;
+    background-color: #A67EF3;
+    border-radius: 16px;
+    cursor: pointer;
+    font-size: 0.7em;
+    margin-left: 0.5em;
+  }
+  
+
+  
   

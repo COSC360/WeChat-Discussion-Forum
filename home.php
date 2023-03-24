@@ -1,19 +1,28 @@
 <?php
-// session_start();
-// require 'connectDB.php';
-// if(!empty($_SESSION["user_id"])){
-//     $user_id = $_SESSION["user_id"];
-//     $result = mysqli_query($conn, "SELECT * FROM users WHERE user_id = $user_id");
-//     $row = mysqli_fetch_assoc($result);
-// }else{
-//     header("Location: login.php");
-// }
-
 session_start();
-if(empty($_SESSION["user_id"])){
-    header("Location: login.php");
-}
+?>
 
+<!-- php code for search functionality -->
+<?php 
+require_once 'connectDB.php';
+require_once "updateScore.php";
+
+if(isset($_GET['submit'])) {
+$search_term = mysqli_real_escape_string($conn, $_GET['search']);
+//query that checks search term using LIKE
+$query = "SELECT p.*, u.username, c.community_name FROM posts p 
+INNER JOIN users u ON p.created_by  = u.user_id
+INNER JOIN communities c on p.community_id = c.community_id
+WHERE p.title LIKE '%$search_term%'
+OR c.community_name LIKE '%$search_term%'
+OR u.username LIKE '%$search_term%'";
+} else {
+//query to show all posts
+$query = "SELECT p.*, u.username, c.community_name FROM posts p 
+INNER JOIN users u ON p.created_by = u.user_id
+INNER JOIN communities c ON p.community_id = c.community_id";
+}
+$result = mysqli_query($conn, $query);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,12 +35,15 @@ if(empty($_SESSION["user_id"])){
     <title>WeChat</title>
 </head>
 <body>
-    <h1>Welcome <?php echo $_SESSION["username"]; ?></h1>
-    
     <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
-        <input type = "text" placeholder = "Type here to search..">
+        <a href="viewAccount.php" class = "button"> <?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
+        <a href="createAccount.php" class = "button"> Login</a>
+        <div class = "search-container"> 
+            <form method = "GET">
+                <input type = "text" name = "search" placeholder = "Type here to search..">
+                <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
@@ -45,24 +57,23 @@ if(empty($_SESSION["user_id"])){
         </div>
         <div class = "scroll">
         <?php 
-        require_once 'connectDB.php';
-        require_once "updateScore.php";
-        $query = "SELECT p.*, u.username, c.community_name FROM posts p 
-        INNER JOIN users u ON p.created_by = u.user_id
-        INNER JOIN communities c ON p.community_id = c.community_id";
-        $result = mysqli_query($conn, $query);
+        
         while ($row = mysqli_fetch_assoc($result)) {
+            $community_name = $row['community_name'];
+            $community_id = $row['community_id'];
+            $title = $row['title'];
+            $post_id = $row['post_id'];
             echo '<div class = "posts">';
             echo '<div class = "top">';
             echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
-            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['community_name'].'</p>';
+            echo '<p style = "color:#A67EF3; font-size: .8em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</div>';
-            echo '<p onclick="redirectToPost('.$row['post_id'].')" style="cursor: pointer;">' . $row['title'] . '</p>';
+            echo '<a href="viewPost.php?post_id='.$post_id.'">'.$title.'</a>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
             echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';
             echo '<div class="downvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-down"></i></div>';
-            echo '<div class="commentButton" style="cursor: pointer;" onclick="redirectToPost('.$row['post_id'].')"><i class="fa-regular fa-comment"></i></div>';
+            echo '<a href="viewPost.php?post_id='.$post_id.'" class="commentButton" style="cursor: pointer;"><i class="fa-regular fa-comment"></i></a>';
             echo '</div>';
             echo '</div>';
         }
@@ -91,7 +102,7 @@ if(empty($_SESSION["user_id"])){
                 if (xhr.status === 200) {
                     // Update the score in the UI
                     const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore;
+                    scoreElement.innerHTML = newScore; ,
                     button.classList.add('active');
                     button.parentNode.querySelector('.downvote').classList.remove('active');
                 } else {
@@ -131,19 +142,37 @@ if(empty($_SESSION["user_id"])){
     </div>
     <div class = "flex-left"> 
         <div class = "popular">
-            <p style = "color:#A67EF3; font-size: 1.3em;" >Popular</p>
-            <p>Manchester United</p>
-            <p>Call of Duty</p>
-            <p>Cats</p>
-            <p>Turkey</p>
+            <?php 
+            require_once 'connectDB.php';
+            $query = 'SELECT c.community_name, u.community_id, COUNT(u.user_id)as numJoined FROM communities c JOIN user_community u
+             ON c.community_id = u.community_id GROUP BY c.community_id ORDER BY numJoined DESC
+            LIMIT 5';
+            $result = mysqli_query($conn, $query);
+            echo '<p style = "color:#A67EF3; font-size: 1.3em;" >Top Communities</p>';
+            while($row = mysqli_fetch_assoc($result)) {
+            $community_id = $row['community_id'];
+            $community_name = $row['community_name'];
+            echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
+            }
+             ?>
         </div>
         <div class = "categories">
-            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="community.php" >Communities</a></p>
-            <p>Gaming</p>
-            <p>Sports</p>
-            <p>Nature</p>
-            <p>Business</p>
-            <p>More...</p>
+            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="communityList.php" >Communities</a></p>
+            <?php 
+            require_once 'connectDB.php';
+            if(isset($_SESSION['user_id'])) {
+            $user_id = $_SESSION['user_id'];
+            $query = "SELECT c.community_name, u.community_id FROM communities c JOIN user_community u ON c.community_id = u.community_id WHERE u.user_id = '$user_id' LIMIT 7";
+            $result = mysqli_query($conn, $query);
+            while($row = mysqli_fetch_assoc($result)) {
+            $community_id = $row['community_id'];
+            $community_name = $row['community_name'];
+            echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
+            }
+        } else {
+            echo '<p> Login To Join Communities </p>';
+        }
+             ?>
             <a href="createCommunity.php" class = "button">Create</a>
         </div>
       

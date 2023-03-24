@@ -1,8 +1,13 @@
+<?php
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>User Overview</title>
 	<link rel="stylesheet" href="css/viewAcc.css">
 	<script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">

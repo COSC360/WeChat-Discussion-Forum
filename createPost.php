@@ -1,5 +1,11 @@
 <?php
 
+session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+
+
 include 'connectDB.php';
 
 if($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -7,9 +13,9 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $title = $_POST['title'];
     $community = $_POST['community'];
     $description = $_POST['description'];
-    $user_id = 6;
+    $username = $_SESSION['user_id'];
     //user id is placeholder for the user_id of poster
-    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES ('$title', '$description', '$user_id', '$community')";
+    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES ('$title', '$description', '$username', '$community')";
     $result = mysqli_query($conn, $query);
 
     mysqli_close($conn);
@@ -21,18 +27,25 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 <head>
     <meta charset="UTF-8">
     <link rel = "stylesheet" href = "css/style.css">
+    <script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeChat</title>
 </head>
 <body>
-    <div class = "nav">
-        <a href="#user" class = "button"> User</a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
-        <input type = "text" placeholder = "Type here to search..">
-        <a href= "#filter" class = "button">Filter</a>
-        <a href= "home.php" class = "button">Home</a>
-        <a href= "#settings" class = "button">Settings</a>
+<div class = "nav">
+        <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
+        <a href="createAccount.php" class = "button"> Login</a>
+        <div class = "search-container"> 
+            <form method = "GET">
+                <input type = "text" name = "search" placeholder = "Type here to search..">
+                <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+        </div>
+        <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
+        <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
+        <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
+        <a href = "logout.php" class = "button">Logout</a>
     </div>
     <div class = "flex-create">
         <div class = "createPost">
