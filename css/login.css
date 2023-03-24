@@ -39,6 +39,25 @@ content:"\2713";
 .invalid{
   color:red;
 }
+.button {
+  background-color: #A67EF3;
+  border: 2px solid #616161;
+  display:flex;
+  flex-direction: column;
+  border-radius: 30px;
+  box-shadow: #616161 2.5px 1.5px 0 0;
+  color: #3a3a3a;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.7em;
+  padding: 1em;
+  line-height: 2em;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
 .invalid:before{
   position: relative;
   left:-20px;
