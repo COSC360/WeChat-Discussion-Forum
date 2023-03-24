@@ -50,9 +50,12 @@ if(isset($_POST["submit"])){
     <input type="text" id="username" name="username" placeholder="Username" required><br>
     <input type="password" id="password" name="password" placeholder="Password" required><br>
     <!-- <input type="submit" value="Log in"> -->
-
+    <a href="resetPassword.php">Forgot Password?</a>
+    
     <button class = "button" type="submit" name="submit">Log in</button>
+
 </form>
+
      <p>New to WeChat? <a href="createAccount.php">Sign Up</a></p>
     </section>
 
