@@ -1,28 +1,67 @@
 <?php
-include 'connectDB.php';
+session_start();
+require_once 'connectDB.php';
+if (isset($_POST['username']) && isset($_POST['oldpassword']) && isset($_POST['newpassword']) && isset($_POST['newpassword-check'])) {
+$username = $_POST['username'];
+$oldpassword = $_POST['oldpassword'];
+$newpassword = $_POST['newpassword'];
+$password_confirm = $_POST['newpassword-check'];
 
-$sql = "SELECT * FROM users WHERE user_id = 1"; // replace 1 with the actual user id you want to retrieve
-
-// Execute the query
-$result = mysqli_query($conn, $sql);
-
-// Check if the query was successful
-if (!$result) {
-  die("Query failed: " . mysqli_error($conn));
+if ($newpassword != $password_confirm) {
+    // Passwords do not match, display an error message
+    echo "Error: Passwords do not match.";
+    exit;
 }
 
-// Fetch the user information
-$user = mysqli_fetch_assoc($result);
+$stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND password=?");
+$stmt->bind_param("ss", $username, $oldpassword);
+$stmt->execute();
+$result = $stmt->get_result();
 
-// Close the database connection
-mysqli_close($conn);
+if ($result->num_rows == 0) {
+    // Invalid username/password combination, display an error message
+    echo "Error: Invalid username or password.";
+    exit;
+}
+
+$stmt = $conn->prepare("UPDATE users SET password=? WHERE username=?");
+$stmt->bind_param("ss", $newpassword, $username);
+$stmt->execute();
+
+echo "<script>alert('Password updated successfully.');</script>";
+header("Location: login.php");
+exit;
+}
 ?>
 
-<!-- HTML code to display the user information -->
-<div>
-  <h2>User Settings</h2>
-  <p>Username: <?php echo $user['username']; ?></p>
-  <p>Email: <?php echo $user['email']; ?></p>
-  <!-- Add more user information here -->
-</div>
 
+<!DOCTYPE html>
+<html>
+<head>
+	<title>User Settings</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/settings.css">
+</head>
+<body>
+<a href= "home.php" class = "button">Home</a>
+<a href = "logout.php" class = "button">Logout</a>
+	<h1>User Settings</h1>
+	<form method = "POST" action= "settings.php">
+		<label for="username">Username:</label>
+		<input type="text" id="username" name="username" placeholder="Username" required>
+		<label for="oldpassword">Old Password:</label>
+		<input type="password" id="oldpassword" name="oldpassword" placeholder="Old Password" required>
+    <label for="newpassword">New Password:</label>
+		<input type="password" id="newpassword" name="newpassword" placeholder="New Password" required>
+    <label for="newpassword">Re-enter New Password:</label>
+		<input type="password" id="password-check" name="newpassword-check" placeholder="Re-enter New Password" required>
+		<!-- <label for="theme">Select Theme:</label>
+		<select id="theme" name="theme">
+			<option value="light">Light</option>
+			<option value="dark">Dark</option>
+		</select> -->
+		<input type="submit" value="Save">
+	</form>
+</body>
+</html>

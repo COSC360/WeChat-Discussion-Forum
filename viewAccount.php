@@ -1,4 +1,5 @@
 <?php
+require 'connectDB.php';
 session_start();
 if(empty($_SESSION["user_id"])){
     header("Location: login.php");
@@ -11,72 +12,116 @@ if(empty($_SESSION["user_id"])){
 	<link rel="stylesheet" href="css/viewAcc.css">
 	<script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	
-   
 </head>
+
 <body>
-	<div class = "nav">
-        <a href="viewAccount.php" class = "button"> <i class="fa-solid fa-user"></i></a> 
-        <a href="createAccount.php" class = "button"> Login</a> 
-        <input type = "text" placeholder = "Type here to search..">
-        <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
-        <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
-        <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
-        <a href = "logout.php" class = "button">Logout</a>
+	<div class="nav">
+        <a href="viewAccount.php" class="button"><i class="fa-solid fa-user"></i></a> 
+        <input type="text" placeholder="Type here to search..">
+        <a href="#filter" class="button"><i class="fa-solid fa-filter"></i></a>
+        <a href="home.php" class="button"><i class="fa-solid fa-house"></i></a>
+        <a href="settings.php" class="button"><i class="fa-solid fa-gear"></i></a>
+        <a href="logout.php" class="button">Logout</a>
     </div>
+
 	<div class="container">
-		<h1>Hello ben10lover! Here is your overview...</h1>
+		<?php
+			// Retrieve user's username and account creation date from the database
+			$user_id = $_SESSION['user_id'];
+			$sql = "SELECT username, created_at FROM users WHERE user_id = $user_id";
+			$result = mysqli_query($conn, $sql);
+			$row = mysqli_fetch_assoc($result);
+			$username = $row['username'];
+			$created_at = $row['created_at'];
+
+			// Format the account creation date as a human-readable date
+			$join_date = date('F Y', strtotime($created_at));
+		?>
+
+		<h1>Hello <?php echo $username; ?>! Here is your overview...</h1>
+
 		<div class="user-info">
-            <p style = "color:#A67EF3; font-size: 1.3em;" >u; ben10lover</p>
-			<p><strong>Joined:</strong> May 2022</p>
-			<p><strong>Score:</strong> 1000</p>
-			<p><strong>Status:</strong> Active</p>
+			<p style="color:#A67EF3; font-size: 1.3em;">u; <?php echo $username; ?></p>
+			<p><strong>Joined:</strong> <?php echo $join_date; ?></p>
 		</div>
-        <div class = "communities">
-            <p style = "color:#A67EF3; font-size: 1.3em;" >My Communities:</p>
-            <p>c; Kelowna</p>
-            <p>c; Jeans</p>
-            <p>c; Cats </p>
-        </div>
-	</div>
-    
-        
-		<div class="user-posts"> 
-			<h2>User Posts</h2>
-            <input type = "text" placeholder = "Search for posts and comments">
-			<!-- Post 1 -->
-			<div class="post1">
-				<h3>What are the best restaurants in Kelowna?</h3>
-				<p>c; kelowna</p>
-				<p>Score: 100</p>
-                <div class="post-actions">
-                    <a href="#">Comment</a>
-                    <a href="#">Share</a>
-                    <a href="#">Save</a>
-                </div>
+
+        <div class="communities">
+			<?php
+				// Retrieve user's communities from the database
+				$user_id = $_SESSION['user_id'];
+				$sql = "SELECT communities.community_name FROM user_community
+						JOIN communities ON user_community.community_id = communities.community_id
+						WHERE user_community.user_id = $user_id";
+				$result = mysqli_query($conn, $sql);
+			?>
+
+			<p style="color:#A67EF3; font-size: 1.3em;">My Communities:</p>
+
+			<?php
+				// Display user's communities on the page
+				while ($row = mysqli_fetch_assoc($result)) {
+					$community_name = $row['community_name'];
+					echo "<p>c; $community_name</p>";
+				}
+			?>
+		</div>
+		<h2>My Posts: </h2>
+		<div class="user-posts">
+			
+			<input type="text" name = "search" placeholder="Search for posts and comments">
+            <?php 
+require_once 'connectDB.php';
+require_once "updateScore.php";
+
+// get user's ID from session
+$user_id = $_SESSION['user_id'];
+
+if(isset($_GET['submit'])) {
+    $search_term = mysqli_real_escape_string($conn, $_GET['search']);
+    //query that checks search term using LIKE
+    $query = "SELECT p.*, u.username, c.community_name FROM posts p 
+    INNER JOIN users u ON p.created_by = u.user_id
+    INNER JOIN communities c ON p.community_id = c.community_id
+    WHERE (p.title LIKE '%$search_term%'
+    OR c.community_name LIKE '%$search_term%'
+    OR u.username LIKE '%$search_term%')
+    AND p.created_by = $user_id";
+} else {
+    //query to show all posts
+    $query = "SELECT p.*, u.username, c.community_name FROM posts p 
+    INNER JOIN users u ON p.created_by = u.user_id
+    INNER JOIN communities c ON p.community_id = c.community_id
+    WHERE p.created_by = $user_id";
+}
+
+$result = mysqli_query($conn, $query);
+
+// loop through posts and display them
+while($row = mysqli_fetch_assoc($result)) {
+    $post_id = $row['post_id'];
+    $title = $row['title'];
+    $community = $row['community_name'];
+    $actions = "<a href='#'>Comment</a>
+                <a href='#'>Share</a>
+                <a href='#'>Save</a>";
+
+    echo "<div class='posts'>
+            <h3>$title</h3>
+            <p>c; $community</p>
+            <div class='post-actions'>
+                $actions
             </div>
-			<!-- Post 2 -->
-			<div class="post2">
-				<h3>Am I able to wash denim jeans?</h3>
-				<p>c; Jeans</p>
-				<p>Score: 50</p>
-                <div class="post-actions">
-                    <a href="#">Comment</a>
-                    <a href="#">Share</a>
-                    <a href="#">Save</a>
-                </div>
-            </div>
-			<!-- Post 3 -->
-			<div class="post3">
-				<h3>How much should I feed my cat</h3>
-				<p>c; cats</p>
-				<p>Score: 200</p>
-                <div class="post-actions">
-                    <a href="#">Comment</a>
-                    <a href="#">Share</a>
-                    <a href="#">Save</a>
-                </div>
-            </div>
+          </div>";
+
+
+}
+
+?>
+
+
+			
+
+			
 		</div>
 	</div>
 </body>
