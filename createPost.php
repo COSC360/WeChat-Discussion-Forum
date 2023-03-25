@@ -15,8 +15,10 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $username = $_SESSION['user_id'];
     //user id is placeholder for the user_id of poster
-    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES ('$title', '$description', '$username', '$community')";
-    $result = mysqli_query($conn, $query);
+    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES (?,?,?,?)";
+    $stmt = mysqli_prepare($conn,$query);
+    mysqli_stmt_bind_param($stmt, "ssii", $title, $description, $username, $community)
+    $result = mysqli_stmt_execute($stmt);
 
     mysqli_close($conn);
 }

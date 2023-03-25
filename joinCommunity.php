@@ -15,8 +15,11 @@ $result = mysqli_query($conn,$query);
 if(mysqli_num_rows($result) == 0){
     // Insert a new row into the user_community table
 
-    $query = "INSERT INTO user_community (user_id, community_id) VALUES ('$user_id', '$community_id')";
-    mysqli_query($conn, $query);
+    $query = "INSERT INTO user_community (user_id, community_id) VALUES (?, ?)";
+    $stmt = mysqli_prepare($conn, $query);
+    mysqli_stmt_bind_param($stmt, "ii", $user_id, $community_id);
+    $result = mysqli_stmt_execute($stmt);
+    
 }
 
 // Close the database connection

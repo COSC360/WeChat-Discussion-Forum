@@ -7,26 +7,27 @@ if(!empty($_SESSION["user_id"])){
 if(isset($_POST["submit"])){
     $username = $_POST['username'];
     $password = $_POST['password'];
-    $result = mysqli_query($conn, "SELECT * FROM users WHERE username = '$username' and password = '$password'");
-    $row = mysqli_fetch_assoc($result);
-    if(mysqli_num_rows($result) > 0){
-        if($password == $row['password']){
-            // $_SESSION["login"]=true;
-            $_SESSION["username"] = $row['username'];
-            $_SESSION["user_id"]= $row["user_id"];
-            header("Location: home.php" );
-        }else{
-            echo
-            "<script>
-                alert('Oops, Wrong Password');</script>";
-        }
     
+    $stmt = $conn->prepare("SELECT * FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
+    
+    if($user){
+        if(password_verify($password, $user['password'])){
+            $_SESSION["username"] = $user['username'];
+            $_SESSION["user_id"]= $user["user_id"];
+            header("Location: home.php");
+            exit();
         }else{
-            echo 
-            "<script>
-                alert('Sorry, user is not registered');</script>";
+            echo "<script>alert('Oops, Wrong Password');</script>";
         }
+    }else{
+        echo "<script>alert('Sorry, user is not registered');</script>";
+    }
 }
+
 
 ?>
 

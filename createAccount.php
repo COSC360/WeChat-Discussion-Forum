@@ -16,9 +16,12 @@ if(isset($_POST["submit"])){
             alert('Username or email already exists');</script>";
     }else{
         if($password == $confirmPassword){
-            // $password = password_hash($password, PASSWORD_DEFAULT);
-            $query = "INSERT INTO users (username, email, password) VALUES ('$username', '$email', '$password')";
-            $result = mysqli_query($conn, $query);
+            $passwordHashed = password_hash($password, PASSWORD_DEFAULT);
+            $query = "INSERT INTO users (username, email, password) VALUES (?, ?, ?)";
+            $stmt = mysqli_prepare($conn, $query);
+            mysqli_stmt_bind_param($stmt, "sss", $username, $email, $passwordHashed);
+            $result = mysqli_stmt_execute($stmt);
+
             echo 
                 "<script>
                     alert('Account created successfully');</script>";    
