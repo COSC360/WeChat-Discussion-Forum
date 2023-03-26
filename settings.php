@@ -30,6 +30,7 @@ echo "<script>alert('Password updated successfully.');</script>";
 header("Location: login.php");
 exit;
 }
+}
 ?>
 
 
