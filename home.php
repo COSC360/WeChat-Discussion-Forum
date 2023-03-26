@@ -112,7 +112,7 @@ $result = mysqli_query($conn, $query);
                 if (xhr.status === 200) {
                     // Update the score in the UI
                     const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore; ,
+                    scoreElement.innerHTML = newScore; 
                     button.classList.add('active');
                     button.parentNode.querySelector('.downvote').classList.remove('active');
                 } else {
