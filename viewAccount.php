@@ -28,20 +28,22 @@ if(empty($_SESSION["user_id"])){
 		<?php
 			// Retrieve user's username and account creation date from the database
 			$user_id = $_SESSION['user_id'];
-			$sql = "SELECT username, created_at FROM users WHERE user_id = $user_id";
+			$sql = "SELECT username, created_at, profile FROM users WHERE user_id = $user_id";
 			$result = mysqli_query($conn, $sql);
 			$row = mysqli_fetch_assoc($result);
 			$username = $row['username'];
 			$created_at = $row['created_at'];
+			$profile_pic = $row['profile'];
 
 			// Format the account creation date as a human-readable date
 			$join_date = date('F Y', strtotime($created_at));
 		?>
 
-		<h1>Hello <?php echo $username; ?>! Here is your overview...</h1>
+		<h1 style ="color:#A67EF3;">Hello <?php echo $username; ?>! Here is your overview...</h1>
 
 		<div class="user-info">
 			<p style="color:#A67EF3; font-size: 1.3em;">u; <?php echo $username; ?></p>
+			<img src="uploads/<?php echo $profile_pic; ?>" alt="Profile Picture">
 			<p><strong>Joined:</strong> <?php echo $join_date; ?></p>
 		</div>
 
@@ -65,7 +67,7 @@ if(empty($_SESSION["user_id"])){
 				}
 			?>
 		</div>
-		<h2>My Posts: </h2>
+		<h2 style="color:#A67EF3; font-size: 1.3em;">My Posts: </h2>
 		<div class="user-posts">
 			
 			<input type="text" name = "search" placeholder="Search for posts and comments">
