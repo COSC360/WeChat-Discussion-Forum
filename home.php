@@ -30,12 +30,14 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <link rel = "stylesheet" href = "css/style.css">
     <script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
+    <link rel="icon" href="images/logo.jpg">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeChat</title>
 </head>
 <body>
     <div class = "nav">
+        <img src = "images/navLogo.jpg" alt = "logo" class = "logo">
         <a href="viewAccount.php" class = "button"> <?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
         <a href="createAccount.php" class = "button"> Login</a>
         <?php  require_once 'connectDB.php';

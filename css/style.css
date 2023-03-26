@@ -8,6 +8,10 @@ input  {
     padding: 0.4em;
     background-color: #D9D9D9;
 }
+.logo{
+  width:8%;
+  height:8%;
+}
 .nav {
 display:flex;
 align-items: center;
