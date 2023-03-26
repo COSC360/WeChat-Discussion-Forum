@@ -13,20 +13,18 @@ if ($newpassword != $password_confirm) {
     exit;
 }
 
-$stmt = $conn->prepare("SELECT * FROM users WHERE username=? AND password=?");
-$stmt->bind_param("ss", $username, $oldpassword);
-$stmt->execute();
-$result = $stmt->get_result();
+$stmt = $conn->prepare("SELECT * FROM users WHERE username=?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    $user = $result->fetch_assoc();
 
-if ($result->num_rows == 0) {
-    // Invalid username/password combination, display an error message
-    echo "Error: Invalid username or password.";
-    exit;
-}
-
-$stmt = $conn->prepare("UPDATE users SET password=? WHERE username=?");
-$stmt->bind_param("ss", $newpassword, $username);
-$stmt->execute();
+    if ($user && password_verify($oldpassword, $user['password'])) {
+        // Old password matches, update the password in the database
+        $new_password_hashed = password_hash($newpassword, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("UPDATE users SET password=? WHERE username=?");
+        $stmt->bind_param("ss", $new_password_hashed, $username);
+        $stmt->execute();
 
 echo "<script>alert('Password updated successfully.');</script>";
 header("Location: login.php");
