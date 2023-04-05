@@ -47,7 +47,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class = "flex-create">
         <div class = "createPost">
             <h1 style = "color:#A67EF3; font-size: 1.3em;" >Create Community</h1>
-            <form class = "createPosts" name = "createPosts" method = "post" action = "createCommunity.php" onsubmit="return(validate());">
+            <form class = "createPosts" name = "createPosts" method = "post" action = "createCommunity.php">
                 <input type="text" id="community_name" name="community_name" placeholder="Community Name"><br>
                 <input type="text" id="description" name="description" placeholder="Description"><br>
                 <input type="submit" value="Create" id="postButton">
