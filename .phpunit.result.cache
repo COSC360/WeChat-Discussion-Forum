@@ -1,0 +1,1 @@
+{"version":1,"defects":{"connectDBTest::testConnectionSuccess":4,"connectDBTest::testConnectionError":4,"loginTest::testLoginPageLoads":3},"times":{"connectDBTest::testConnectionSuccess":0.013,"connectDBTest::testConnectionError":0,"loginTest::testLogin":0.007,"loginTest::testLoginPageLoads":0.03}}
