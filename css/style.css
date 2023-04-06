@@ -63,6 +63,10 @@ div.scroll{
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
+    margin-top: 6em;
+}
+.commentContainer{
+  margin-top: 7em;
 }
 .popular{
     color: rgb(160, 158, 158);

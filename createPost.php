@@ -14,14 +14,44 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $community = $_POST['community'];
     $description = $_POST['description'];
     $username = $_SESSION['user_id'];
-    //user id is placeholder for the user_id of poster
-    $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES (?,?,?,?)";
-    $stmt = mysqli_prepare($conn,$query);
-    mysqli_stmt_bind_param($stmt, "ssii", $title, $description, $username, $community);
-    $result = mysqli_stmt_execute($stmt);
-    header("Location: home.php");
+     // handle image file upload
+     if(isset($_FILES['image']) && $_FILES['image']['error'] == 0) {
+    $fileName = basename($_FILES["image"]["name"]);
+    $fileType = pathinfo($fileName, PATHINFO_EXTENSION);
 
-    mysqli_close($conn);
+        // Check if file is an image
+        $allowedTypes = array("jpg", "jpeg", "png", "gif", "heic");
+        if(!in_array($fileType, $allowedTypes)) {
+            echo "<script>alert('File must be an image.');</script>";
+            exit;
+        }
+
+     $target_dir = "postUploads/";
+     $uploadPath = $target_dir . $fileName;
+     if(move_uploaded_file($_FILES["image"]["tmp_name"], $uploadPath)) {
+        //insert statement if image is added
+        $imagePath = $uploadPath;
+        $query = "INSERT INTO posts (title, content, created_by, community_id, image) VALUES (?,?,?,?,?)";
+        $stmt = mysqli_prepare($conn,$query);
+        mysqli_stmt_bind_param($stmt, "ssiis", $title, $description, $username, $community, $fileName);
+        $result = mysqli_stmt_execute($stmt);
+        header("Location: home.php");
+    
+        mysqli_close($conn);
+    } else {
+        echo "<script>alert('Error uploading file.');</script>";
+        exit;
+    }
+    } else {
+     //insert statement for no image
+     $query = "INSERT INTO posts (title, content, created_by, community_id) VALUES (?,?,?,?)";
+     $stmt = mysqli_prepare($conn,$query);
+     mysqli_stmt_bind_param($stmt, "ssii", $title, $description, $username, $community);
+     $result = mysqli_stmt_execute($stmt);
+     header("Location: home.php");
+ 
+     mysqli_close($conn);
+    }
 }
 ?>
 
@@ -53,7 +83,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class = "flex-create">
         <div class = "createPost">
             <h1 style = "color:#A67EF3; font-size: 1.3em;" >Create Post</h1>
-            <form class = "createPosts" name = "createPosts" method = "post" action = "createPost.php" onsubmit="return(validate());">
+            <form class = "createPosts" name = "createPosts" method = "post"  enctype="multipart/form-data" action = "createPost.php" onsubmit="return(validate());">
                 <input type="text" id="title" name="title" placeholder="Title"><br>
                 <select id="community" name="community">
         <option value="">Choose Community</option>
@@ -74,8 +104,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
             mysqli_close($conn);
         ?>
     </select><br>
-                <input type="text" id="description" name="description" placeholder="Description (optional)"><br>
-                <input type="image" name="image" id="image" alt ="Add image"/><br>
+                <input id="description" name="description" placeholder="Description (optional)"></textarea><br>
+                <input type="file" id="image" name="image"><br>
                 <input type="submit" value="Post" id="postButton">
             </form>
         </div>

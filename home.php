@@ -64,7 +64,7 @@ $result = mysqli_query($conn, $query);
 
 <div class = "flex-container">
     <div class = "flex">
-        <div class = "createPost">
+        <div >
             <a href="createPost.php" class = "button">Post</a>
         </div>
         <div class = "scroll">
@@ -75,11 +75,15 @@ $result = mysqli_query($conn, $query);
             $community_id = $row['community_id'];
             $title = $row['title'];
             $post_id = $row['post_id'];
+            $image = $row['image'];
             echo '<div class = "posts">';
             echo '<div class = "top">';
             echo '<p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id='.$row['user_id'].'">'.$row['username'].'</a></p>';
             echo '<p style = "color:#A67EF3; font-size: .8em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</div>';
+            if($row['image'] != null) {
+                echo '<div><img src="postUploads/'.$image.'"></div>';
+            }
             echo '<a href="viewPost.php?post_id='.$post_id.'">'.$title.'</a>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
