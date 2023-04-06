@@ -180,6 +180,10 @@ $result = mysqli_query($conn, $query);
             $community_id = $row['community_id'];
             $community_name = $row['community_name'];
             echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
+            echo '<form method="post" action="leaveCommunity.php">';
+            echo '<input type="hidden" name="community_id" value="'.$community_id.'">';
+            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #A67EF3; " class="fa-solid fa-trash"></i></button>';
+            echo '</form>';
             }
         } else {
             echo '<p> Login To Join Communities </p>';
