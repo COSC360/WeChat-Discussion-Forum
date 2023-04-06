@@ -87,22 +87,13 @@ $result = mysqli_query($conn, $query);
             echo '<a href="viewPost.php?post_id='.$post_id.'">'.$title.'</a>';
             echo '<div class="postContainer">';
             echo '<div class="postScore">' . $row['score'] . '</div>';
-            echo '<div class="upvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></div>';
-            echo '<div class="downvote" style="cursor: pointer;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-down"></i></div>';
-            echo '<a href="viewPost.php?post_id='.$post_id.'" class="commentButton" style="cursor: pointer;"><i class="fa-regular fa-comment"></i></a>';
+            echo '<button class="upvote" style="cursor: pointer; background-color:transparent; border:none;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-up"></i></button>';
+            echo '<button class="downvote" style="cursor: pointer; background-color:transparent; border:none;" data-postid="' . $row['post_id'] . '"><i class="fa-solid fa-arrow-down"></i></button>';
+            echo '<a href="viewPost.php?post_id='.$post_id.'" class="commentButton" style="margin-left: 1em;cursor: pointer;"><i class="fa-regular fa-comment"></i></a>';
             echo '</div>';
             echo '</div>';
         }
         ?>
-        <?php
-        //code to check if user logged in
-        if (isset($_SESSION['user_id'])) {
-        $response = array('loggedIn' => true);
-        } else {
-        $response = array('loggedIn' => false);
-        }
-        echo json_encode($response);
-?>
         
         <script>
     function redirectToPost(post_id){

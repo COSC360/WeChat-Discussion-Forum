@@ -198,13 +198,24 @@ img {
 .postContainer {
     display: flex;
     flex-direction: row;
+    color: rgb(160, 158, 158);
 }
 .postContainer div {
     padding-right: 1em;
 }
-.active{
+.upvote{
+  color: rgb(160, 158, 158);
+}
+.downvote{
+  color: rgb(160, 158, 158);
+}
+.upvote.active{
     color: #A67EF3;
 }
+.downvote.active{
+  color: #A67EF3;
+}
+
 /* Set max height for community-container */
 .community-container {
     max-height: 50em;
