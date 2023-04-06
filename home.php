@@ -38,8 +38,11 @@ $result = mysqli_query($conn, $query);
 <body>
     <div class = "nav">
         <img src = "images/navLogo.jpg" alt = "logo" class = "logo">
-        <a href="viewAccount.php" class = "button"> <?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
-        <a href="createAccount.php" class = "button"> Login</a>
+        <?php if(isset($_SESSION["user_id"])) { ?>
+        <a href="viewAccount.php" class="button"><?php echo $_SESSION["username"]; ?></a>
+        <?php } else { ?>
+        <a href="createAccount.php" class="button">Login</a>
+        <?php } ?>
         <?php  require_once 'connectDB.php';
             $query = 'SELECT isAdmin, user_id FROM users WHERE isAdmin = 1';
             $res = mysqli_query($conn, $query);
@@ -47,7 +50,7 @@ $result = mysqli_query($conn, $query);
             while ($rw = mysqli_fetch_assoc($res) ) {
                 $admin = $rw['user_id'];
             if (($_SESSION["user_id"] == $admin)) {
-                echo '<a href = "admin.php" class "button">Admin</a>'; 
+                echo '<a href = "admin.php" class = "button">Admin</a>'; 
                 } 
             }}?>  
         <div class = "search-container"> 

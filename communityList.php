@@ -22,10 +22,24 @@ session_start();
 </head>
 <body>
 <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
-        <a href="createAccount.php" class = "button"> Login</a>
+        <img src = "images/navLogo.jpg" alt = "logo" class = "logo">
+        <?php if(isset($_SESSION["user_id"])) { ?>
+        <a href="viewAccount.php" class="button"><?php echo $_SESSION["username"]; ?></a>
+        <?php } else { ?>
+        <a href="createAccount.php" class="button">Login</a>
+        <?php } ?>
+        <?php  require_once 'connectDB.php';
+            $query = 'SELECT isAdmin, user_id FROM users WHERE isAdmin = 1';
+            $res = mysqli_query($conn, $query);
+            if(isset($_SESSION["user_id"])) {
+            while ($rw = mysqli_fetch_assoc($res) ) {
+                $admin = $rw['user_id'];
+            if (($_SESSION["user_id"] == $admin)) {
+                echo '<a href = "admin.php" class = "button">Admin</a>'; 
+                } 
+            }}?>  
         <div class = "search-container"> 
-            <form method = "POST">
+            <form method = "GET">
                 <input type = "text" name = "search" placeholder = "Type here to search..">
                 <button type = "submit" name = "submit"> <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>

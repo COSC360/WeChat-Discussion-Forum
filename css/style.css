@@ -9,8 +9,8 @@ input  {
     background-color: #D9D9D9;
 }
 .logo{
-  width:8%;
-  height:8%;
+  width:10%;
+  height:60%;
 }
 .nav {
 display:flex;
@@ -20,6 +20,7 @@ margin: 1em;
 padding:10px;
 background: #262D34;
 border-radius: 10px;
+height: 80px;
 }
 .flex-container{
     display: flex;
