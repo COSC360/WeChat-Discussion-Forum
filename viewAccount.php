@@ -10,6 +10,7 @@ if(empty($_SESSION["user_id"])){
 <head>
 	<meta charset="UTF-8">
 	<link rel="stylesheet" href="css/viewAcc.css">
+
 	<script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 </head>
@@ -67,9 +68,9 @@ if(empty($_SESSION["user_id"])){
 				}
 			?>
 		</div>
-		<h2 style="color:#A67EF3; font-size: 1.3em;">My Posts: </h2>
+		
 		<div class="user-posts">
-			
+		<h2 style="color:#A67EF3; font-size: 1.3em;">My Posts: </h2>
 			<input type="text" name = "search" placeholder="Search for posts and comments">
             <?php 
 require_once 'connectDB.php';
@@ -114,18 +115,57 @@ while($row = mysqli_fetch_assoc($result)) {
                 $actions
             </div>
           </div>";
-
-
 }
-
 ?>
+		
+			
 
 
 			
 
 			
 		</div>
+
 	</div>
+	<div class = user-comments>
+	<h2 style="color:#A67EF3; font-size: 1.3em;">My Comments: </h2>
+	<?php
+		  // Get the comments for the current post
+		  //Retrieve user's comments from the database
+		  $user_id = $_SESSION['user_id'];
+		  $sql = "SELECT comments.content, posts.title, communities.community_name 
+				  FROM comments 
+				  JOIN posts ON comments.post_id = posts.post_id 
+				  JOIN communities ON posts.community_id = communities.community_id 
+				  WHERE comments.created_by = $user_id";
+		  
+		  $result = mysqli_query($conn, $sql);
+		  
+		  // Display user's comments on the page
+		  
+		  while ($row = mysqli_fetch_assoc($result)) {
+			  $content = $row['content'];
+			  $post_title = $row['title'];
+			  $community_name = $row['community_name'];
+		  
+			  echo "<div class='comments'>
+					  <h3>$post_title</h3>
+					  <p>c; $community_name</p>
+					  <p>$content</p>
+					</div>";
+		  }
+
+
+
+?>
+</div>
 </body>
+<footer>
+    <p class = "tos">Terms of Service</p>
+    <p class = "tos">About</p>
+    <p class = "tos">Contact Us</p>
+    <p class = "tos">FAQ</p>
+    <p class = "tos">Privacy and Policy</p>
+</footer>
 
 </html>
