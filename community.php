@@ -44,7 +44,10 @@ session_start();
             echo '<p style="font-size: 1.5em;">'.$row['community_name'].'</p>';
             echo '<div style="color:#A67EF3; font-size: 1.2em;">'.$row['description'].'</div> ';
             echo ' <div class="postContainer">';
-            echo '<div style="font-size: 1.2em;" class="button">Join</div>';
+            echo '<form method="POST" action="joinCommunity.php">';
+            echo '<input type="hidden" name="community_id" value="' . $row['community_id'] . '">';
+            echo '<input type = "submit" value = "Join" name = "join" style="font-size: 1.2em;" class="button"</input>';
+            echo '</form>';
             echo '</div>';
             echo '</div>';
             
