@@ -10,7 +10,7 @@ require_once "updateScore.php";
 if(isset($_GET['submit'])) {
 $search_term = mysqli_real_escape_string($conn, $_GET['search']);
 //query that checks search term using LIKE
-$query = "SELECT p.*, u.username, c.community_name FROM posts p 
+$query = "SELECT p.*, u.username, u.user_id, c.community_name FROM posts p 
 INNER JOIN users u ON p.created_by  = u.user_id
 INNER JOIN communities c on p.community_id = c.community_id
 WHERE p.title LIKE '%$search_term%'
@@ -18,7 +18,7 @@ OR c.community_name LIKE '%$search_term%'
 OR u.username LIKE '%$search_term%'";
 } else {
 //query to show all posts
-$query = "SELECT p.*, u.username, c.community_name FROM posts p 
+$query = "SELECT p.*, u.username, u.user_id, c.community_name FROM posts p 
 INNER JOIN users u ON p.created_by = u.user_id
 INNER JOIN communities c ON p.community_id = c.community_id";
 }
@@ -77,7 +77,7 @@ $result = mysqli_query($conn, $query);
             $post_id = $row['post_id'];
             echo '<div class = "posts">';
             echo '<div class = "top">';
-            echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
+            echo '<p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id='.$row['user_id'].'">'.$row['username'].'</a></p>';
             echo '<p style = "color:#A67EF3; font-size: .8em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</div>';
             echo '<a href="viewPost.php?post_id='.$post_id.'">'.$title.'</a>';

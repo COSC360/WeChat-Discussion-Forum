@@ -62,7 +62,7 @@ session_start();
             } else {
                 $community_id = 0;
             }
-            $query = "SELECT p.*, u.username, c.community_name FROM posts p 
+            $query = "SELECT p.*, u.username, u.user_id, c.community_name FROM posts p 
             INNER JOIN users u ON p.created_by = u.user_id
             INNER JOIN communities c ON p.community_id = c.community_id
             WHERE p.community_id = $community_id";
@@ -70,7 +70,7 @@ session_start();
             while ($row = mysqli_fetch_assoc($result)) {
                 echo '<div class = "posts">';
                 echo '<div class = "top">';
-                echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['username'].'</p>';
+                echo '<p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id='.$row['user_id'].'">'.$row['username'].'</a></p>';
                 echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['community_name'].'</p>';
                 echo '</div>';
                 echo '<p onclick="redirectToPost('.$row['post_id'].')" style="cursor: pointer;">' . $row['title'] . '</p>';
