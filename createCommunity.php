@@ -55,6 +55,8 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 </div>
 <script src = "scripts/postValidation.js"></script>
+<script src = "scripts/alert.js"></script>
+
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

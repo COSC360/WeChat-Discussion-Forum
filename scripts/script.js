@@ -23,3 +23,27 @@ downvoteButton[i].addEventListener('click', () => {
     }
 });
 }
+
+// Add event listener to the like button
+document.getElementsByClassName('upvote').addEventListener('click', function() {
+    // Send AJAX request to the server
+    var xhr = new XMLHttpRequest();
+    xhr.open('POST', '/like');
+    xhr.onload = function() {
+      // Update like count display with the returned value
+      document.getElementById('like-count').textContent = xhr.responseText;
+    };
+    xhr.send();
+  });
+  
+  // Set timer to update like count display every 30 seconds
+  setInterval(function() {
+    // Send AJAX request to the server to get the latest like count
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/like-count');
+    xhr.onload = function() {
+      // Update like count display with the returned value
+      document.getElementById('like-count').textContent = xhr.responseText;
+    };
+    xhr.send();
+  }, 30000);

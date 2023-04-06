@@ -191,6 +191,8 @@ $result = mysqli_query($conn, $query);
     </div>
 </div>
 <script src = "scripts/script.js"></script>
+<script src = "scripts/async.js"></script>
+
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

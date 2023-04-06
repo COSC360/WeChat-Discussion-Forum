@@ -159,6 +159,8 @@ session_start();
         });
     });
             </script>
+
+<script src = "scripts/async.js"></script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

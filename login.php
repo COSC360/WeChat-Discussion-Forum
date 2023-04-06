@@ -64,6 +64,7 @@ if(isset($_POST["submit"])){
     <script src = "scripts/login.js"></script>
     <script src = "scripts/passwordValidation.js"></script>
 -->
+
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

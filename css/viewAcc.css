@@ -1,14 +1,26 @@
 body{
     background-color: #1E252B;
-}
+    min-height: 100%;
 
+    
+}
+.user-comments, .user-posts {
+  display: inline-block;
+  width: 64.6%; /* adjust the width to your liking */
+  margin-right: 5%; /* add some spacing between the columns */
+  vertical-align: top;
+
+}
 
 /* Style the main container */
 .container {
     margin: 0 auto;
     max-width: 200px;
     padding: 20px;
-    float:left;
+    float: left;
+    padding-bottom: 6em;
+
+    
   }
   
    input[type="text"] {
@@ -31,6 +43,7 @@ h2{
     width: 12%;
     border-radius: 10px;
 }
+
   /*user info */
   .user-info {
     background-color: #262D34;
@@ -41,12 +54,26 @@ h2{
     padding-bottom: 10px;
     display:flex;
     flex-direction: column;
+    float:left;
   }
   
   
   .user-info p {
     margin: 0;
+    font-size: 1em;
+    color:#A67EF3;
   }
+  
+  .user-info img {
+    display: block; /* display the image as a block element */
+    width: 150px; /* set the width of the image */
+    height: 150px; /* set the height of the image */
+    border-radius: 50%; /* make the image circular */
+    object-fit: cover; /* scale and crop the image to fit the container */
+    object-position: center; /* center the image within the container */
+    margin-bottom: 20px; /* add some space below the image */
+  }
+  
   
   /* communities */
   .communities {
@@ -56,6 +83,10 @@ h2{
     margin-bottom: 20px;
     padding: 8px;
     padding-bottom: 10px;
+    float: left;
+  }
+  .communities p{
+    color: #A67EF3;
   }
   .button {
     background-color: #A67EF3;
@@ -84,28 +115,30 @@ h2{
   .user-posts {
     width: 454%;
     background-color: #262D34;
-    /* border: 4px solid #8b55f0; */
     border-radius: 10px;
     padding: 40px;
-    margin-bottom: 50em;
+    margin-bottom: -50em;
     margin-left: 13.6em;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: justify;
 }
 
 /* user comments */
 .user-comments {
     background-color: #262D34;
-    /* border : 4px solid #8b55f0; */
     border-radius: 10px;
     margin-top: 2.3em;
     padding: 8px;
     padding-bottom: 10px;
     display: flex;
-    max-width: 64.5%;
+    max-width: 75%;
     flex-direction: column;
-    overflow: auto;
+    overflow-y: auto;
+    overflow-x: hidden;
+    text-align: justify;
+    
 }
-
   .comments{
 
 
@@ -126,6 +159,9 @@ h2{
     font-size: 1.5em;
     font-weight: bold;
   }
+  .posts{
+    line-height:normal;
+  }
   
   /* post category */
   .post p:first-child {
@@ -133,6 +169,7 @@ h2{
     font-size: 0.9em;
     color: #666;
   }
+
   
   /* post actions */
   .post-actions {
@@ -150,21 +187,24 @@ h2{
   .post-actions a:hover {
     text-decoration: underline;
   }
-  footer{
+  footer {
     color: rgb(160, 158, 158);
     border: solid #262D34;
     background-color: #262D34;
     border-radius: 1em;
-    margin-top: 2em;
+    margin-top: 1em;
+    margin-left: -1em;
     font-size: small;
     padding-bottom: 2em;
     position:fixed;
-    bottom: 0;
-    max-height: 4em;
+    bottom: 0em; 
+    max-height: 10em;
     width: 100%;
-}
+    transition: bottom 0.3s ease-out; 
+    }
 .tos {
   display: inline-block;
   width:14em;
   padding-left: 1.4em;
 }
+

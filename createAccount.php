@@ -91,6 +91,7 @@ if(isset($_POST["submit"])){
         <p id="number" class="invalid">A <b>number</b></p>
         <p id="maxLength" class="invalid">Minimum <b>8 characters</b></p>
       </div>
+
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>
