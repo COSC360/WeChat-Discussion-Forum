@@ -67,8 +67,22 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
 </head>
 <body>
 <div class = "nav">
-        <a href="viewAccount.php" class = "button"> <?php echo $_SESSION["username"]; ?></a> 
-        <a href="createAccount.php" class = "button"> Login</a>
+        <img src = "images/navLogo.jpg" alt = "logo" class = "logo">
+        <?php if(isset($_SESSION["user_id"])) { ?>
+        <a href="viewAccount.php" class="button"><?php echo $_SESSION["username"]; ?></a>
+        <?php } else { ?>
+        <a href="createAccount.php" class="button">Login</a>
+        <?php } ?>
+        <?php  require_once 'connectDB.php';
+            $query = 'SELECT isAdmin, user_id FROM users WHERE isAdmin = 1';
+            $res = mysqli_query($conn, $query);
+            if(isset($_SESSION["user_id"])) {
+            while ($rw = mysqli_fetch_assoc($res) ) {
+                $admin = $rw['user_id'];
+            if (($_SESSION["user_id"] == $admin)) {
+                echo '<a href = "admin.php" class = "button">Admin</a>'; 
+                } 
+            }}?>  
         <div class = "search-container"> 
             <form method = "GET">
                 <input type = "text" name = "search" placeholder = "Type here to search..">
