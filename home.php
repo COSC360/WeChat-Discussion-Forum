@@ -94,6 +94,15 @@ $result = mysqli_query($conn, $query);
             echo '</div>';
         }
         ?>
+        <?php
+        //code to check if user logged in
+        if (isset($_SESSION['user_id'])) {
+        $response = array('loggedIn' => true);
+        } else {
+        $response = array('loggedIn' => false);
+        }
+        echo json_encode($response);
+?>
         
         <script>
     function redirectToPost(post_id){
@@ -104,55 +113,98 @@ $result = mysqli_query($conn, $query);
     const upvoteButtons = document.querySelectorAll('.upvote');
     const downvoteButtons = document.querySelectorAll('.downvote');
 
-    // Add a click event listener to each upvote button
-    upvoteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const postId = button.dataset.postid;
-            const scoreElement = button.parentNode.querySelector('.postScore');
+    // Check if the user is logged in
+    const xhrLogin = new XMLHttpRequest();
+    xhrLogin.open('GET', 'checkLogin.php');
+    xhrLogin.onload = function() {
+    if (xhrLogin.status === 200) {
+        const response = JSON.parse(xhrLogin.responseText);
+        const loggedIn = response.loggedIn;
+        if (loggedIn) {
+            // User is logged in, so allow voting
+            allowVoting();
+        } else {
+            // User is not logged in, so disable voting
+            disableVoting();
+        }
+    } else {
+        console.error('Error checking login status');
+    }
+};
+xhrLogin.send();
 
-            // Make an AJAX call to update the post score
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'updateScore.php');
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Update the score in the UI
-                    const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore; 
-                    button.classList.add('active');
-                    button.parentNode.querySelector('.downvote').classList.remove('active');
-                } else {
-                    console.error('Error updating score');
-                }
-            };
-            xhr.send(`postId=${postId}&vote=up`);
-        });
+    function allowVoting() {
+   // Add a click event listener to each upvote button
+    upvoteButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const postId = button.dataset.postid;
+        const scoreElement = button.parentNode.querySelector('.postScore');
+
+        // Check if the user has already upvoted this post
+        if (button.classList.contains('active')) {
+            console.log('Already upvoted');
+            return;
+        }
+
+        // Make an AJAX call to update the post score
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'updateScore.php');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Update the score in the UI
+                const newScore = JSON.parse(xhr.responseText).newScore;
+                scoreElement.innerHTML = newScore; 
+                button.classList.add('active');
+                button.parentNode.querySelector('.downvote').classList.remove('active');
+            } else {
+                console.error('Error updating score');
+            }
+        };
+        xhr.send(`postId=${postId}&vote=up`);
     });
+});
+
 
     // Add a click event listener to each downvote button
     downvoteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const postId = button.dataset.postid;
-            const scoreElement = button.parentNode.querySelector('.postScore');
+    button.addEventListener('click', () => {
+        const postId = button.dataset.postid;
+        const scoreElement = button.parentNode.querySelector('.postScore');
 
-            // Make an AJAX call to update the post score
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'updateScore.php');
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Update the score in the UI
-                    const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore;
-                    button.classList.add('active');
-                    button.parentNode.querySelector('.upvote').classList.remove('active');
-                } else {
-                    console.error('Error updating score');
-                }
-            };
-            xhr.send(`postId=${postId}&vote=down`);
-        });
+        // Check if the user has already downvoted this post
+        if (button.classList.contains('active')) {
+            console.log('Already downvoted');
+            return;
+        }
+
+        // Make an AJAX call to update the post score
+        const xhr = new XMLHttpRequest();
+        xhr.open('POST', 'updateScore.php');
+        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        xhr.onload = function() {
+            if (xhr.status === 200) {
+                // Update the score in the UI
+                const newScore = JSON.parse(xhr.responseText).newScore;
+                scoreElement.innerHTML = newScore;
+                button.classList.add('active');
+                button.parentNode.querySelector('.upvote').classList.remove('active');
+            } else {
+                console.error('Error updating score');
+            }
+        };
+        xhr.send(`postId=${postId}&vote=down`);
     });
+});
+    } function disableVoting() {
+// Disable all upvote and downvote buttons
+upvoteButtons.forEach(button => {
+button.disabled = true;
+});
+downvoteButtons.forEach(button => {
+button.disabled = true;
+});
+}
 </script>
     </div>
     </div>
