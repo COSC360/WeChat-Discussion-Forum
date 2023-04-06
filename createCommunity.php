@@ -14,6 +14,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $description = $_POST['description'];
     $query = "INSERT INTO communities (community_name, description) VALUES ('$community_name', '$description')";
     $result = mysqli_query($conn, $query);
+    header("Location: home.php");
 
     mysqli_close($conn);
 }

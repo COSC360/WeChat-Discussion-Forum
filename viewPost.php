@@ -35,7 +35,7 @@ session_start();
     $post_id = $_GET['post_id'];
 
     //fetching posts and associated user and community name.
-    $query = "SELECT p.*, u.username, c.community_name FROM posts p INNER JOIN users u ON p.created_by = u.user_id 
+    $query = "SELECT p.*, u.username, u.user_id, c.community_name FROM posts p INNER JOIN users u ON p.created_by = u.user_id 
     INNER JOIN communities c ON p.community_id = c.community_id
     WHERE p.post_id = '$post_id'";
 
@@ -43,7 +43,7 @@ session_start();
         $post = mysqli_fetch_assoc($result);
 
    
-    $query = "SELECT c.*, u.username FROM comments c INNER JOIN users u ON c.created_by = u.user_id 
+    $query = "SELECT c.*, u.username, u.user_id FROM comments c INNER JOIN users u ON c.created_by = u.user_id 
     WHERE c.post_id = '$post_id'";
 
      // check if search query has been submitted
@@ -83,7 +83,7 @@ session_start();
         <!-- displaying comments -->
         <?php foreach ($comments as $comment): ?>
     <div class="comment">
-        <p style="color:#A67EF3; font-size: .8em;"><?php echo $comment['username']; ?></p>
+    <p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id=<?php echo $comment['user_id']; ?>"><?php echo $comment['username']; ?></a></p>
         <p><?php echo $comment['content']; ?></p>
         <div class="postContainer">
             <div class="postScore"><?php echo $comment['comment_score']; ?></div>
