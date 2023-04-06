@@ -76,6 +76,9 @@ session_start();
                 echo '<p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id='.$row['user_id'].'">'.$row['username'].'</a></p>';
                 echo '<p style = "color:#A67EF3; font-size: .8em;">'.$row['community_name'].'</p>';
                 echo '</div>';
+                if($row['image'] != null) {
+                    echo '<div><img src="postUploads/'.$row['image'].'"></div>';
+                }
                 echo '<p onclick="redirectToPost('.$row['post_id'].')" style="cursor: pointer;">' . $row['title'] . '</p>';
                 echo '<div class="postContainer">';
                 echo '<div class="postScore">' . $row['score'] . '</div>';

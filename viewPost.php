@@ -71,6 +71,9 @@ session_start();
     <div class = "flex-comment">
         <div class = "createPost">
             <h1 style = "color:#A67EF3; font-size: 1.3em;" ><?php echo $post['community_name']; ?></h1>
+            <?php if($post['image'] != null) {
+                echo '<div><img src="postUploads/'.$post['image'].'"></div>';
+            }?>
             <h2 style = "color: #D9D9D9;"><?php echo $post['title']; ?></h2>
             <h3 style = "color: #D9D9D9;"><?php echo $post['content']; ?></h3>
             <form class = "createcomment" action="viewPost.php?post_id=<?php echo $post_id; ?>" method="post" onsubmit = "return validateComment();">
@@ -81,6 +84,7 @@ session_start();
     </div>
     <div class = "scroll">
         <!-- displaying comments -->
+    <div class = "commentContainer">
         <?php foreach ($comments as $comment): ?>
     <div class="comment">
     <p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id=<?php echo $comment['user_id']; ?>"><?php echo $comment['username']; ?></a></p>
@@ -89,6 +93,7 @@ session_start();
             <div class="postScore"><?php echo $comment['comment_score']; ?></div>
             <div class="upvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-up"></i></div>
             <div class="downvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-down"></i></div>
+        </div>
         </div>
     </div>
     <?php endforeach; ?>
