@@ -128,7 +128,7 @@ xhrLogin.send();
    // Add a click event listener to each upvote button
     upvoteButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const postId = button.dataset.postid;
+        const postId = button.dataset.post_id;
         const scoreElement = button.parentNode.querySelector('.postScore');
 
         // Check if the user has already upvoted this post
@@ -152,7 +152,7 @@ xhrLogin.send();
                 console.error('Error updating score');
             }
         };
-        xhr.send(`postId=${postId}&vote=up`);
+        xhr.send(`post_id=${post_id}&vote=up`);
     });
 });
 
@@ -160,7 +160,7 @@ xhrLogin.send();
     // Add a click event listener to each downvote button
     downvoteButtons.forEach(button => {
     button.addEventListener('click', () => {
-        const postId = button.dataset.postid;
+        const postId = button.dataset.post_id;
         const scoreElement = button.parentNode.querySelector('.postScore');
 
         // Check if the user has already downvoted this post
@@ -184,7 +184,7 @@ xhrLogin.send();
                 console.error('Error updating score');
             }
         };
-        xhr.send(`postId=${postId}&vote=down`);
+        xhr.send(`post_id=${post_id}&vote=down`);
     });
 });
     } function disableVoting() {

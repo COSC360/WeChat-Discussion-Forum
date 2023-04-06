@@ -4,7 +4,7 @@ require_once 'connectDB.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Get the post ID and vote from the request
-    $postId = $_POST['postId'];
+    $postId = $_POST['post_id'];
     $vote = $_POST['vote'];
 
     // Update the post score in the database
