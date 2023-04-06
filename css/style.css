@@ -60,8 +60,8 @@ div.scroll{
     padding-left: 1.5em;
 }
 .createPost{
-    border: solid #262D34;
-    background-color: #262D34;
+    /* border: solid #262D34; */
+    /* background-color: #262D34; */
     border-radius: 1em;
 }
 .popular{
@@ -111,7 +111,7 @@ footer{
   display: inline-block;
   font-weight: 600;
   font-size: 0.7em;
-  margin-top:2em;
+  margin-top:1.3em;
   padding: 1em;
   line-height: 2em;
   text-align: center;
