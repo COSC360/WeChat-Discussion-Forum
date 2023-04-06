@@ -19,6 +19,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt = mysqli_prepare($conn,$query);
     mysqli_stmt_bind_param($stmt, "ssii", $title, $description, $username, $community);
     $result = mysqli_stmt_execute($stmt);
+    header("Location: home.php");
 
     mysqli_close($conn);
 }
