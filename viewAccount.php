@@ -74,8 +74,6 @@ if(isset($_GET['user_id'])) {
 				$profile_pic = $row['profile'];
 				// Format the account creation date as a human-readable date
 				$join_date = date('F Y', strtotime($created_at));
-				// Display the specified user's information
-				echo "<h1 style='color:#A67EF3;'>$username's Account Overview</h1>";
 			} else {
 				// Retrieve information for the logged-in user
 				$user_id = $_SESSION['user_id'];
@@ -178,8 +176,8 @@ $result = mysqli_query($conn, $query);
 				// Format the account creation date as a human-readable date
 				$join_date = date('F Y', strtotime($created_at));
 				echo '<div>';
-				echo '<p style="color:#A67EF3; font-size: 4em;">'. $username. '</p>';
-				echo '<img src="uploads/'. $profile_pic.'" alt="Profile Picture">';
+				echo '<p style="color:#A67EF3; font-size: 2em;">'. $username. '</p>';
+				echo '<img src="uploads/'. $profile_pic.'" alt="Profile Picture" style="max-width: 200px;">';
 				echo '<p><strong>Joined:</strong>'.$join_date.'</p>';
 				echo '</div>';
 			} else {
@@ -195,7 +193,7 @@ $result = mysqli_query($conn, $query);
 				$join_date = date('F Y', strtotime($created_at));
 				// Display the logged-in user's information
 				echo '<div>';
-				echo '<p style="color:#A67EF3; font-size: 1.3em;">'. $username. '</p>';
+				echo '<p style="color:#A67EF3; font-size: 2em;">'. $username. '</p>';
 				echo '<img src="uploads/'. $profile_pic.'" alt="Profile Picture">';
 				echo '<p><strong>Joined:</strong>'.$join_date.'</p>';
 				echo '</div>';
