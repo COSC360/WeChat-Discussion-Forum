@@ -36,7 +36,8 @@ $result = mysqli_query($conn, $query);
     <title>WeChat</title>
 </head>
 <body>
-
+<div class = "nav">
+        <img src = "images/navLogo.jpg" alt = "logo" class = "logo">
         <?php  require_once 'connectDB.php';
             $query = 'SELECT isAdmin, user_id FROM users WHERE isAdmin = 1';
             $res = mysqli_query($conn, $query);
@@ -47,7 +48,7 @@ $result = mysqli_query($conn, $query);
                 echo '<a href = "admin.php" class = "button" style = "color: #fbeee0;">Admin</a>'; 
                 } 
             }}?>  
-                    <button id="UserStatistics"><i class="fas fa-chart-bar fa-lg"></i></button>
+                    <button id="UserStatistics" class = "button"><i class="fas fa-chart-bar fa-lg"></i></button>
                     <script>
                         const userStatsButton = document.getElementById("UserStatistics");
                         userStatsButton.addEventListener("click", function() {
