@@ -35,7 +35,7 @@ if(isset($_GET['user_id'])) {
 <div class = "nav">
         <img src = "images/navLogo.jpg" alt = "logo" class = "logo">
         <?php if(isset($_SESSION["user_id"])) { ?>
-        <a href="viewAccount.php" class="button"><?php echo $_SESSION["username"]; ?></a>
+        <a href="viewAccount.php" class="button" style = "color: #fbeee0;"><?php echo $_SESSION["username"]; ?></a>
         <?php } else { ?>
         <a href="createAccount.php" class="button">Login</a>
         <?php } ?>
@@ -255,6 +255,7 @@ $result = mysqli_query($conn, $query);
 		  while ($row = mysqli_fetch_assoc($result)) {
 			  $content = $row['content'];
 			  $post_title = $row['title'];
+			  $post_id = $row['post_id'];
 			  $community_name = $row['community_name']; 
             echo '<a href="viewPost.php?post_id='.$post_id.'">'.$post_title.'</a>';
             echo '<p>'.$content.'</p>';

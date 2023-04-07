@@ -124,62 +124,9 @@ session_start();
                 }
                 return true;
             }
-
-            // Get the upvote and downvote buttons
-    const upvoteButtons = document.querySelectorAll('.upvote');
-    const downvoteButtons = document.querySelectorAll('.downvote');
-
-    // Add a click event listener to each upvote button
-    upvoteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const comment_id = button.getAttribute('comment_id');
-            const scoreElement = button.parentNode.querySelector('.postScore');
-
-            // Make an AJAX call to update the post score
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'updateCommentScore.php');
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Update the score in the UI
-                    const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore; 
-                    button.classList.add('active');
-                    button.parentNode.querySelector('.downvote').classList.remove('active');
-                } else {
-                    console.error('Error updating score');
-                }
-            };
-            xhr.send(`comment_id=${comment_id}&vote=up`);
-        });
-    });
-
-    // Add a click event listener to each downvote button
-    downvoteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const comment_id = button.getAttribute('comment_id');
-            const scoreElement = button.parentNode.querySelector('.postScore');
-
-            // Make an AJAX call to update the post score
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'updateCommentScore.php');
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Update the score in the UI
-                    const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore;
-                    button.classList.add('active');
-                    button.parentNode.querySelector('.upvote').classList.remove('active');
-                } else {
-                    console.error('Error updating score');
-                }
-            };
-            xhr.send(`comment_id=${comment_id}&vote=down`);
-        });
-    });
             </script>
-            <script src = "scripts/async.js"></script>
+            <script src = "scripts/asyncComments.js"></script>
+            <script src = "scripts/script.js"></script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

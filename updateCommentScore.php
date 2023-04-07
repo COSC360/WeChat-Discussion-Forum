@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $result = mysqli_query($conn, $query);
     $row = mysqli_fetch_assoc($result);
     $newScore = $row['comment_score'];
-    echo json_encode(['comment_score' => $newScore]);
+    echo json_encode(['newScore' => $newScore]);
 }
 
 ?>
