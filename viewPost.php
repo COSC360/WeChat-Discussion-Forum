@@ -42,7 +42,7 @@ session_start();
         <a href = "logout.php" class = "button">Logout</a>
     </div>
     <?php 
-    
+    require_once "updateScore.php";
     require_once 'connectDB.php';
 
     //get post_id from parameter
@@ -101,6 +101,7 @@ session_start();
             </form>
         </div>
     </div>
+
     <div class = "scroll">
         <!-- displaying comments -->
     <div class = "commentContainer">
@@ -183,8 +184,7 @@ session_start();
         });
     });
             </script>
-
-<script src = "scripts/async.js"></script>
+            <script src = "scripts/async.js"></script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

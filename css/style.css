@@ -22,6 +22,10 @@ background: #262D34;
 border-radius: 10px;
 height: 80px;
 }
+.nav .button.active {
+  background-color: #FF0000; /* set background color */
+  color: #FFFFFF; /* set text color */
+}
 .flex-container{
     display: flex;
     flex-direction: row-reverse;
@@ -45,6 +49,16 @@ height: 80px;
     margin-left: auto;
     max-width: 16em;
 }
+.flex-right{
+  margin-top: 4.2em;
+  height : 20em;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  margin-right: auto;
+  max-width: 16em;
+}
 div.scroll{
     overflow-y: auto;
     overflow-x: hidden;
@@ -57,7 +71,7 @@ div.scroll{
     background-color: #262D34;
     border-radius: 1em;
     margin:1em;
-    padding-right: 20em;
+    padding-right: 10em;
     padding-left: 1.5em;
 }
 .createPost{
@@ -76,7 +90,7 @@ div.scroll{
     border-radius: 1em;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    padding-bottom: 5em;
+    padding-bottom: 1em;
 }
 .categories{
     color: rgb(160, 158, 158);

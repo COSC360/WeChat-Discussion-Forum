@@ -3,7 +3,7 @@
 
  $host = 'localhost';
 $username = 'root';
-$password = '';
+$password = 'rootpw';
 $dbname = 'discussiondatabase'; //db name here
 
 //Database credentials for server dev
