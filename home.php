@@ -103,7 +103,6 @@ $result = mysqli_query($conn, $query);
         window.location.href = "viewPost.php?post_id="+post_id;
     }
     </script>
-
     </div>
     </div>
     <div class = "flex-left"> 
@@ -133,10 +132,10 @@ $result = mysqli_query($conn, $query);
             while($row = mysqli_fetch_assoc($result)) {
             $community_id = $row['community_id'];
             $community_name = $row['community_name'];
-            echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '<form method="post" action="leaveCommunity.php">';
             echo '<input type="hidden" name="community_id" value="'.$community_id.'">';
-            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #A67EF3; " class="fa-solid fa-trash"></i></button>';
+            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #A67EF3; background-color: transparent;" class="fa-solid fa-trash"></i></button>';
+			echo '<p style = "display: inline-block; margin-left:1em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</form>';
             }
         } else {

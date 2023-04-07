@@ -41,8 +41,7 @@ session_start();
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
         <a href = "logout.php" class = "button">Logout</a>
     </div>
-    <?php 
-    require_once "updateScore.php";
+    <?php
     require_once 'connectDB.php';
 
     //get post_id from parameter
@@ -90,11 +89,6 @@ session_start();
             }?>
             <h2 style = "color: #D9D9D9;"><?php echo $post['title']; ?></h2>
             <h3 style = "color: #D9D9D9;"><?php echo $post['content']; ?></h3>
-            <div class = "postContainer">
-            <div class="postScore"><?php echo $post['score']; ?></div>
-            <button class="upvote" style="cursor: pointer; background-color:transparent; border:none;" data-postid=<?php echo $post['post_id']; ?>><i class="fa-solid fa-arrow-up"></i></button>
-            <button class="downvote" style="cursor: pointer; background-color:transparent; border:none;" data-postid=<?php echo $post['post_id']; ?>><i class="fa-solid fa-arrow-down"></i></button>
-            </div>
             <form class = "createcomment" action="viewPost.php?post_id=<?php echo $post_id; ?>" method="post" onsubmit = "return validateComment();">
                 <input type="text" id="commentBox" name="comment" placeholder="Comment"><br>
                 <input type="submit" value="Comment" id="postButton" style = "background-color: #A67EF3;">
