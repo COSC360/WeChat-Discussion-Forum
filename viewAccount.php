@@ -194,7 +194,7 @@ $result = mysqli_query($conn, $query);
 				// Display the logged-in user's information
 				echo '<div>';
 				echo '<p style="color:#A67EF3; font-size: 2em;">'. $username. '</p>';
-				echo '<img src="uploads/'. $profile_pic.'" alt="Profile Picture">';
+				echo '<img src="uploads/'. $profile_pic.'" alt="Profile Picture" style="max-width: 200px;">';
 				echo '<p><strong>Joined:</strong>'.$join_date.'</p>';
 				echo '</div>';
 			}
@@ -215,8 +215,8 @@ $result = mysqli_query($conn, $query);
             $community_name = $row['community_name'];
             echo '<form method="post" action="leaveCommunity.php">';
             echo '<input type="hidden" name="community_id" value="'.$community_id.'">';
-            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #A67EF3; background-color: transparent;" class="fa-solid fa-trash"></i></button>';
-			echo '<p style = "display: inline-block; margin-left:1em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
+            echo '<button type="submit" class="deleteButton" style="display: inline-block;"><i style="color: red; background: none;" class="fa-solid fa-sign-out"></i></button>';
+            echo '<p style="display: inline-block; margin-left: 1em;"><a href="community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</form>';
             }
         } else {

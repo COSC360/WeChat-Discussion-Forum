@@ -32,7 +32,7 @@ height: 80px;
     margin-top: -3em;
 }
 .flex{
-    height: 50em;
+    height: 45em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -41,7 +41,7 @@ height: 80px;
 }
 .flex-left{
     margin-top: 4.2em;
-    height : 20em;
+    height : 10em;
     display: flex;
     justify-content: left;
     align-items: left;
@@ -63,7 +63,7 @@ div.scroll{
     overflow-y: auto;
     overflow-x: hidden;
     text-align: justify;
-    height: 600px;
+    height: 650px;
 }
 .posts{
     color: rgb(160, 158, 158);
@@ -76,12 +76,17 @@ div.scroll{
 }
 .createPost{
     /* border: solid #262D34; */
-    /* background-color: #262D34; */
+    background-color: #262D34;
     border-radius: 1em;
-    margin-top: 6em;
+    margin-top: 9em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 2em;
 }
 .commentContainer{
-  margin-top: 7em;
+  padding-top: 2em;
+  margin-top: 8em;
+  padding-bottom: 5em;
 }
 .popular{
     color: rgb(160, 158, 158);

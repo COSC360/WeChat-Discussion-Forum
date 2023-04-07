@@ -68,7 +68,7 @@ $result = mysqli_query($conn, $query);
 <div class = "flex-container">
     <div class = "flex">
         <div >
-            <a href="createPost.php" class = "button">Post</a>
+            <a href="createPost.php" class = "button" style= "font-size: 1.6em; margin-top: 2em; margin-bottom: 0.5em;">Create Post</a>
         </div>
         <div class = "scroll">
         <?php 
@@ -98,7 +98,7 @@ $result = mysqli_query($conn, $query);
         }
         ?>
         
-        <script>
+    <script>
     function redirectToPost(post_id){
         window.location.href = "viewPost.php?post_id="+post_id;
     }
@@ -134,8 +134,8 @@ $result = mysqli_query($conn, $query);
             $community_name = $row['community_name'];
             echo '<form method="post" action="leaveCommunity.php">';
             echo '<input type="hidden" name="community_id" value="'.$community_id.'">';
-            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #A67EF3; background-color: transparent;" class="fa-solid fa-trash"></i></button>';
-			echo '<p style = "display: inline-block; margin-left:1em;"><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
+            echo '<button type="submit" class="deleteButton" style="display: inline-block;"><i style="color: red; background: none;" class="fa-solid fa-sign-out"></i></button>';
+            echo '<p style="display: inline-block; margin-left: 1em;"><a href="community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</form>';
             }
         } else {

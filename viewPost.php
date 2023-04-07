@@ -96,7 +96,7 @@ session_start();
         </div>
     </div>
 
-    <div class = "scroll">
+   
         <!-- displaying comments -->
     <div class = "commentContainer">
         <?php foreach ($comments as $comment): ?>
@@ -109,9 +109,10 @@ session_start();
             <div class="downvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-down"></i></div>
         </div>
         </div>
-    </div>
+    
     <?php endforeach; ?>
-        </div>
+    </div>
+        
 
         <script>
             //checks if there is content in the comment box
