@@ -140,7 +140,7 @@ h2{
     
 }
   .comments{
-
+color:white;
 
     }
   .nav {
@@ -161,6 +161,7 @@ h2{
   }
   .posts{
     line-height:normal;
+    color:white;
   }
   
   /* post category */

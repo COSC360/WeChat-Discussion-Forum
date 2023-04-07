@@ -121,6 +121,7 @@ while($row = mysqli_fetch_assoc($result)) {
     $post_id = $row['post_id'];
     $title = $row['title'];
     $community = $row['community_name'];
+	$image = $row['image'];
     $actions = "<a href='#'>Comment</a>
                 <a href='#'>Share</a>
                 <a href='#'>Save</a>";
@@ -128,10 +129,12 @@ while($row = mysqli_fetch_assoc($result)) {
     echo "<div class='posts'>
             <h3>$title</h3>
             <p>c; $community</p>
+			<img src='postUploads/$image' alt='Post Image'>
             <div class='post-actions'>
                 $actions
             </div>
           </div>";
+		  
 }
 ?>
 		
