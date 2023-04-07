@@ -41,8 +41,7 @@ session_start();
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
         <a href = "logout.php" class = "button">Logout</a>
     </div>
-    <?php 
-    
+    <?php
     require_once 'connectDB.php';
 
     //get post_id from parameter
@@ -90,18 +89,14 @@ session_start();
             }?>
             <h2 style = "color: #D9D9D9;"><?php echo $post['title']; ?></h2>
             <h3 style = "color: #D9D9D9;"><?php echo $post['content']; ?></h3>
-            <div class = "postContainer">
-            <div class="postScore"><?php echo $post['score']; ?></div>
-            <button class="upvote" style="cursor: pointer; background-color:transparent; border:none;" data-postid=<?php echo $post['post_id']; ?>><i class="fa-solid fa-arrow-up"></i></button>
-            <button class="downvote" style="cursor: pointer; background-color:transparent; border:none;" data-postid=<?php echo $post['post_id']; ?>><i class="fa-solid fa-arrow-down"></i></button>
-            </div>
             <form class = "createcomment" action="viewPost.php?post_id=<?php echo $post_id; ?>" method="post" onsubmit = "return validateComment();">
                 <input type="text" id="commentBox" name="comment" placeholder="Comment"><br>
                 <input type="submit" value="Comment" id="postButton" style = "background-color: #A67EF3;">
             </form>
         </div>
     </div>
-    <div class = "scroll">
+
+   
         <!-- displaying comments -->
     <div class = "commentContainer">
         <?php foreach ($comments as $comment): ?>
@@ -114,9 +109,10 @@ session_start();
             <div class="downvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-down"></i></div>
         </div>
         </div>
-    </div>
+    
     <?php endforeach; ?>
-        </div>
+    </div>
+        
 
         <script>
             //checks if there is content in the comment box
@@ -128,63 +124,9 @@ session_start();
                 }
                 return true;
             }
-
-            // Get the upvote and downvote buttons
-    const upvoteButtons = document.querySelectorAll('.upvote');
-    const downvoteButtons = document.querySelectorAll('.downvote');
-
-    // Add a click event listener to each upvote button
-    upvoteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const comment_id = button.getAttribute('comment_id');
-            const scoreElement = button.parentNode.querySelector('.postScore');
-
-            // Make an AJAX call to update the post score
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'updateCommentScore.php');
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Update the score in the UI
-                    const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore; 
-                    button.classList.add('active');
-                    button.parentNode.querySelector('.downvote').classList.remove('active');
-                } else {
-                    console.error('Error updating score');
-                }
-            };
-            xhr.send(`comment_id=${comment_id}&vote=up`);
-        });
-    });
-
-    // Add a click event listener to each downvote button
-    downvoteButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            const comment_id = button.getAttribute('comment_id');
-            const scoreElement = button.parentNode.querySelector('.postScore');
-
-            // Make an AJAX call to update the post score
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', 'updateCommentScore.php');
-            xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-            xhr.onload = function() {
-                if (xhr.status === 200) {
-                    // Update the score in the UI
-                    const newScore = JSON.parse(xhr.responseText).newScore;
-                    scoreElement.innerHTML = newScore;
-                    button.classList.add('active');
-                    button.parentNode.querySelector('.upvote').classList.remove('active');
-                } else {
-                    console.error('Error updating score');
-                }
-            };
-            xhr.send(`comment_id=${comment_id}&vote=down`);
-        });
-    });
             </script>
-
-<script src = "scripts/async.js"></script>
+            <script src = "scripts/asyncComments.js"></script>
+            <script src = "scripts/script.js"></script>
 </body>
 <footer>
     <p class = "tos">Terms of Service</p>

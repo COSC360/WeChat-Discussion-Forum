@@ -9,11 +9,11 @@ window.onload = function() {
       // Attach an event listener to each upvote button
       button.addEventListener('click', function() {
         // Get the post ID from the button's data-postid attribute
-        const postId = button.getAttribute('data-postid');
+        const comment_id = button.getAttribute('comment_id');
         
         // Send an AJAX request to the server to upvote the post
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'updateScore.php');
+        xhr.open('POST', 'updateCommentScore.php');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
           // If the request is successful, update the post score
@@ -23,7 +23,7 @@ window.onload = function() {
             scoreElement.textContent = currentScore + 1;
           }
         };
-        xhr.send('post_id=' + postId + '&vote=up');
+        xhr.send('comment_id=' + comment_id + '&vote=up');
       });
     });
   
@@ -32,11 +32,11 @@ window.onload = function() {
       // Attach an event listener to each downvote button
       button.addEventListener('click', function() {
         // Get the post ID from the button's data-postid attribute
-        const postId = button.getAttribute('data-postid');
+        const commentId = button.getAttribute('comment_id');
         
         // Send an AJAX request to the server to downvote the post
         const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'updateScore.php');
+        xhr.open('POST', 'updateCommentScore.php');
         xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
         xhr.onload = function() {
           // If the request is successful, update the post score
@@ -46,7 +46,7 @@ window.onload = function() {
             scoreElement.textContent = currentScore - 1;
           }
         };
-        xhr.send('post_id=' + postId + '&vote=down');
+        xhr.send('comment_id=' + commentId + '&vote=down');
       });
     });
   
@@ -55,10 +55,10 @@ window.onload = function() {
       // Loop through all the posts on the page
       const postContainers = document.querySelectorAll('.postContainer');
       postContainers.forEach(function(container) {
-        const postId = container.querySelector('.upvote').getAttribute('data-postid');
+        const commentId = container.querySelector('.upvote').getAttribute('comment_id');
         // Send an AJAX request to the server to get the updated post score
         const xhr = new XMLHttpRequest();
-        xhr.open('GET', 'getScore.php?post_id=' + postId);
+        xhr.open('GET', 'getScore.php?comment_id=' + commentId);
         xhr.onload = function() {
           // If the request is successful, update the post score
           if (xhr.status === 200) {

@@ -22,13 +22,17 @@ background: #262D34;
 border-radius: 10px;
 height: 80px;
 }
+.nav .button.active {
+  background-color: #FF0000; /* set background color */
+  color: #FFFFFF; /* set text color */
+}
 .flex-container{
     display: flex;
     flex-direction: row-reverse;
     margin-top: -3em;
 }
 .flex{
-    height: 50em;
+    height: 45em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -37,7 +41,7 @@ height: 80px;
 }
 .flex-left{
     margin-top: 4.2em;
-    height : 20em;
+    height : 10em;
     display: flex;
     justify-content: left;
     align-items: left;
@@ -45,11 +49,21 @@ height: 80px;
     margin-left: auto;
     max-width: 16em;
 }
+.flex-right{
+  margin-top: 4.2em;
+  height : 20em;
+  display: flex;
+  justify-content: left;
+  align-items: left;
+  flex-direction: column;
+  margin-right: auto;
+  max-width: 16em;
+}
 div.scroll{
     overflow-y: auto;
     overflow-x: hidden;
     text-align: justify;
-    height: 600px;
+    height: 650px;
 }
 .posts{
     color: rgb(160, 158, 158);
@@ -57,17 +71,22 @@ div.scroll{
     background-color: #262D34;
     border-radius: 1em;
     margin:1em;
-    padding-right: 20em;
+    padding-right: 10em;
     padding-left: 1.5em;
 }
 .createPost{
     /* border: solid #262D34; */
-    /* background-color: #262D34; */
+    background-color: #262D34;
     border-radius: 1em;
-    margin-top: 6em;
+    margin-top: 9em;
+    padding-left: 2em;
+    padding-right: 2em;
+    padding-bottom: 2em;
 }
 .commentContainer{
-  margin-top: 7em;
+  padding-top: 2em;
+  margin-top: 8em;
+  padding-bottom: 5em;
 }
 .popular{
     color: rgb(160, 158, 158);
@@ -76,7 +95,7 @@ div.scroll{
     border-radius: 1em;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    padding-bottom: 5em;
+    padding-bottom: 1em;
 }
 .categories{
     color: rgb(160, 158, 158);

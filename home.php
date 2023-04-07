@@ -60,7 +60,7 @@ $result = mysqli_query($conn, $query);
             </form>
         </div>
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
-        <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
+        <a href= "home.php" class = "button" style = "color: #fbeee0;"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
         <a href = "logout.php" class = "button">Logout</a>
     </div>
@@ -68,7 +68,7 @@ $result = mysqli_query($conn, $query);
 <div class = "flex-container">
     <div class = "flex">
         <div >
-            <a href="createPost.php" class = "button">Post</a>
+            <a href="createPost.php" class = "button" style= "font-size: 1.6em; margin-top: 2em; margin-bottom: 0.5em;">Create Post</a>
         </div>
         <div class = "scroll">
         <?php 
@@ -98,108 +98,11 @@ $result = mysqli_query($conn, $query);
         }
         ?>
         
-        <script>
+    <script>
     function redirectToPost(post_id){
         window.location.href = "viewPost.php?post_id="+post_id;
     }
-
-    // Get the upvote and downvote buttons
-    const upvoteButtons = document.querySelectorAll('.upvote');
-    const downvoteButtons = document.querySelectorAll('.downvote');
-
-    // Check if the user is logged in
-    const xhrLogin = new XMLHttpRequest();
-    xhrLogin.open('GET', 'checkLogin.php');
-    xhrLogin.onload = function() {
-    if (xhrLogin.status === 200) {
-        const response = JSON.parse(xhrLogin.responseText);
-        const loggedIn = response.loggedIn;
-        if (loggedIn) {
-            // User is logged in, so allow voting
-            allowVoting();
-        } else {
-            // User is not logged in, so disable voting
-            disableVoting();
-        }
-    } else {
-        console.error('Error checking login status');
-    }
-};
-xhrLogin.send();
-
-    function allowVoting() {
-   // Add a click event listener to each upvote button
-    upvoteButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const postId = button.dataset.post_id;
-        const scoreElement = button.parentNode.querySelector('.postScore');
-
-        // Check if the user has already upvoted this post
-        if (button.classList.contains('active')) {
-            console.log('Already upvoted');
-            return;
-        }
-
-        // Make an AJAX call to update the post score
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'updateScore.php');
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                // Update the score in the UI
-                const newScore = JSON.parse(xhr.responseText).newScore;
-                scoreElement.innerHTML = newScore; 
-                button.classList.add('active');
-                button.parentNode.querySelector('.downvote').classList.remove('active');
-            } else {
-                console.error('Error updating score');
-            }
-        };
-        xhr.send(`post_id=${post_id}&vote=up`);
-    });
-});
-
-
-    // Add a click event listener to each downvote button
-    downvoteButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const postId = button.dataset.post_id;
-        const scoreElement = button.parentNode.querySelector('.postScore');
-
-        // Check if the user has already downvoted this post
-        if (button.classList.contains('active')) {
-            console.log('Already downvoted');
-            return;
-        }
-
-        // Make an AJAX call to update the post score
-        const xhr = new XMLHttpRequest();
-        xhr.open('POST', 'updateScore.php');
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.onload = function() {
-            if (xhr.status === 200) {
-                // Update the score in the UI
-                const newScore = JSON.parse(xhr.responseText).newScore;
-                scoreElement.innerHTML = newScore;
-                button.classList.add('active');
-                button.parentNode.querySelector('.upvote').classList.remove('active');
-            } else {
-                console.error('Error updating score');
-            }
-        };
-        xhr.send(`post_id=${post_id}&vote=down`);
-    });
-});
-    } function disableVoting() {
-// Disable all upvote and downvote buttons
-upvoteButtons.forEach(button => {
-button.disabled = true;
-});
-downvoteButtons.forEach(button => {
-button.disabled = true;
-});
-}
-</script>
+    </script>
     </div>
     </div>
     <div class = "flex-left"> 
@@ -229,10 +132,10 @@ button.disabled = true;
             while($row = mysqli_fetch_assoc($result)) {
             $community_id = $row['community_id'];
             $community_name = $row['community_name'];
-            echo '<p><a href = "community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '<form method="post" action="leaveCommunity.php">';
             echo '<input type="hidden" name="community_id" value="'.$community_id.'">';
-            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #A67EF3; " class="fa-solid fa-trash"></i></button>';
+            echo '<button type="submit" class="deleteButton" style="display: inline-block;"><i style="color: red; background: none;" class="fa-solid fa-sign-out"></i></button>';
+            echo '<p style="display: inline-block; margin-left: 1em;"><a href="community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</form>';
             }
         } else {

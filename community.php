@@ -49,18 +49,22 @@ session_start();
         if(isset($_GET['community_id'])){
             $community_id = $_GET['community_id'];
         }
-        $query = "SELECT community_id, community_name, description FROM communities WHERE community_id = $community_id";
+        $query = "SELECT c.community_id, c.community_name, c.description, COUNT(DISTINCT u.user_id) AS totalJoined
+         FROM communities c JOIN user_community u ON u.community_id = c.community_id WHERE u.community_id = $community_id";
         $result = mysqli_query($conn, $query);
         while($row = mysqli_fetch_assoc($result)) {
         
             echo '<div class="communities">';
-            echo '<p style="color:#A67EF3; font-size: 1.6em;">'.$row['community_id'].'</p>';
-            echo '<p style="font-size: 1.5em;">'.$row['community_name'].'</p>';
+            echo '<div style="color:#A67EF3;font-size: 1.8em;">'.$row['community_name'].'</div>';
+            echo '<hr>';
+            echo '<div style="font-size: 1.2em;">Members: '.$row['totalJoined'].'</div>';
+            echo '<hr >';
             echo '<div style="color:#A67EF3; font-size: 1.2em;">'.$row['description'].'</div> ';
+            echo '<hr >';
             echo ' <div class="postContainer">';
             echo '<form method="POST" action="joinCommunity.php">';
             echo '<input type="hidden" name="community_id" value="' . $row['community_id'] . '">';
-            echo '<input type = "submit" value = "Join" name = "join" style="font-size: 1.2em;" class="button"</input>';
+            echo '<input type = "submit" value = "Join" name = "join" style="font-size: 1.2em; max-width: 15em;" class="button"</input>';
             echo '</form>';
             echo '</div>';
             echo '</div>';
