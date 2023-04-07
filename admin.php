@@ -29,11 +29,14 @@ $result = mysqli_query($conn, $query);
     <meta charset="UTF-8">
     <link rel = "stylesheet" href = "css/style.css">
     <script src="https://kit.fontawesome.com/41893cf31a.js" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WeChat</title>
 </head>
 <body>
+
     <div class = "nav">
         <a href="viewAccount.php" class = "button"> <?php if(isset($_SESSION["user_id"])) {echo $_SESSION["username"]; } else {echo "";} ?></a> 
         <a href="createAccount.php" class = "button"> Login</a>
@@ -47,6 +50,14 @@ $result = mysqli_query($conn, $query);
                 echo '<a href = "admin.php" class "button">Admin</a>'; 
                 } 
             }}?>  
+                    <button id="UserStatistics"><i class="fas fa-chart-bar fa-lg"></i></button>
+                    <script>
+                        const userStatsButton = document.getElementById("UserStatistics");
+                        userStatsButton.addEventListener("click", function() {
+                        window.location.href = "adminGraph.php";
+                        });
+                    </script>
+
         <div class = "search-container"> 
             <form method = "GET">
                 <input type = "text" name = "search" placeholder = "Type here to search..">
@@ -57,6 +68,8 @@ $result = mysqli_query($conn, $query);
         <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
         <a href = "logout.php" class = "button">Logout</a>
+        
+
     </div>
 
 <div class = "flex-container">
