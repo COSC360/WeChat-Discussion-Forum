@@ -48,7 +48,7 @@ $result = mysqli_query($conn, $query);
             while ($rw = mysqli_fetch_assoc($res) ) {
                 $admin = $rw['user_id'];
             if (($_SESSION["user_id"] == $admin)) {
-                echo '<a href = "admin.php" class = "button">Admin</a>'; 
+                echo '<a href = "admin.php" class = "button" style = "color: #fbeee0;">Admin</a>'; 
                 } 
             }}?>  
         <div class = "search-container"> 

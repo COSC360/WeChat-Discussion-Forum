@@ -60,7 +60,7 @@ $result = mysqli_query($conn, $query);
             </form>
         </div>
         <a href= "#filter" class = "button"><i class="fa-solid fa-filter"></i></a>
-        <a href= "home.php" class = "button"><i class="fa-solid fa-house"></i></a>
+        <a href= "home.php" class = "button" style = "color: #fbeee0;"><i class="fa-solid fa-house"></i></a>
         <a href= "settings.php" class = "button"><i class="fa-solid fa-gear"></i></a>
         <a href = "logout.php" class = "button">Logout</a>
     </div>
