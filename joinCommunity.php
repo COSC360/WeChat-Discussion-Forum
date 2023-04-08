@@ -1,5 +1,9 @@
 <?php
 session_start();
+if(empty($_SESSION["user_id"])){
+    header("Location: login.php");
+}
+
 if(isset($_SESSION["user_id"])){
 
 include_once 'connectDB.php';
