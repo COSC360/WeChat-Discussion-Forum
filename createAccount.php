@@ -74,7 +74,7 @@ if(isset($_POST["submit"])){
 	<section id="create-account"> 
         <h1>Create Account</h1>
 
-        <form action = "" method = "POST" autocomplete = "off" enctype="multipart/form-data">
+        <form name = "signupForm" action = "" method = "POST" autocomplete = "off" enctype="multipart/form-data">
             <input type="text" id="new-username" name="new-username" placeholder="Username" required value = ""><br>
             <input type="email" id="email" name="email" placeholder="Email Address" required value = ""><br>
             <input type="file" id="profile" name="profile" accept="image/*"><br>

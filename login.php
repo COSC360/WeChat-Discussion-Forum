@@ -39,6 +39,7 @@ if(isset($_POST["submit"])){
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel = "stylesheet" href = "css/login.css">
     <link rel = "stylesheet" href = "css/style.css">
+
     
     <title>Login</title>
 </head>
@@ -47,7 +48,7 @@ if(isset($_POST["submit"])){
 <section id="login">
         <h1>Login</h1>
 
-<form action = "" method = "POST" autocomplete = "off">
+<form name = "loginForm" action = "" method = "POST" autocomplete = "off">
     <input type="text" id="username" name="username" placeholder="Username" required><br>
     <input type="password" id="password" name="password" placeholder="Password" required><br>
     <!-- <input type="submit" value="Log in"> -->
