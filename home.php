@@ -136,7 +136,7 @@ $result = mysqli_query($conn, $query);
             $community_name = $row['community_name'];
             echo '<form method="post" action="leaveCommunity.php">';
             echo '<input type="hidden" name="community_id" value="'.$community_id.'">';
-            echo '<button type="submit" class="deleteButton" style="display: inline-block;"><i style="color: red; background: none;" class="fa-solid fa-sign-out"></i></button>';
+            echo '<button type="submit" class="deleteButton1" style="display: inline-block;"><i style="color: red; background: none;" class="fa-solid fa-sign-out"></i></button>';
             echo '<p style="display: inline-block; margin-left: 1em;"><a href="community.php?community_id='.$community_id.'">'.$community_name.'</a></p>';
             echo '</form>';
             }
