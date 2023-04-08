@@ -19,6 +19,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("i", $user_id);
     $stmt->execute();
     $stmt->close();
+
+    //Delete Communities
+    $stmt = $conn->prepare("DELETE FROM communities WHERE community_id = ?");
+    $stmt->bind_param("i", $user_id);
+    $stmt->execute();
+    $stmt->close();
     // Redirect to the homepage
     header('Location: admin.php');
     exit();

@@ -39,6 +39,8 @@ $labels = json_encode($labels);
     
 </head>
 <body>
+<a href= "admin.php" class = "button">Admin</i></a>
+
 <canvas id="myChart"></canvas>
     <script>
         //chart 1

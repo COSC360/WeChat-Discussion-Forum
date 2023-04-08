@@ -213,6 +213,10 @@ footer{
   -webkit-user-select: none;
   touch-action: manipulation;
 }
+#UserStatistics:hover{
+  background-color: #fbeee0;
+  transition: 0.4s;
+}
 #myChart {
   width: 400px;
   height: 400px;

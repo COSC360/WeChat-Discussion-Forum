@@ -71,6 +71,7 @@ session_start();
             echo '<form method="POST" action="joinCommunity.php">';
             echo '<input type="hidden" name="community_id" value="' . $row['community_id'] . '">';
             echo '<input type = "submit" value = "Join" name = "join" style="font-size: 1.2em;" class="button"</input>';
+            echo '<button type="submit" class="deleteButton" style = "display: inline-block;" ><i style=" color: #616161; " class="fa-solid fa-trash"></i></button>';
             echo '</form>';
             echo '</div>';
             echo '</div>';
