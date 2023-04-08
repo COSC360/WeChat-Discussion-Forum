@@ -215,7 +215,6 @@ switch ($mode) {
 								<input type="button" value="Start Over" style = "width:25%;">
 							</a>
 							<br><br>
-							<div><a href="login.php">Login</a></div>
 						</form>
 					<?php
 					break;
@@ -224,7 +223,6 @@ switch ($mode) {
 					// code...
 					?>
 						<form method="post" action="resetPassword.php?mode=enter_password"> 
-							<h1>Forgot Password</h1>
 							<h3>Enter your new password</h3>
 							<span style="font-size: 12px;color:red;">
 							<?php 
@@ -243,7 +241,6 @@ switch ($mode) {
 								<input type="button" value="Start Over">
 							</a>
 							<br><br>
-							<div><a href="login.php">Login</a></div>
 						</form>
 					<?php
 					break;

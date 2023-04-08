@@ -122,7 +122,9 @@ $result = mysqli_query($conn, $query);
              ?>
         </div>
         <div class = "categories">
-            <p style = "color:#A67EF3; font-size: 1.3em;" ><a href="communityList.php" >Communities</a></p>
+            <p style = "color:#A67EF3; font-size: 1.3em;" >Communities</p>
+            <!-- <a href="communityList.php" >Communities</a></p> -->
+            
             <?php 
             require_once 'connectDB.php';
             if(isset($_SESSION['user_id'])) {
@@ -143,6 +145,8 @@ $result = mysqli_query($conn, $query);
         }
              ?>
             <a href="createCommunity.php" class = "button">Create</a>
+            <a href="communityList.php" class = "button">Join</a>
+
         </div>
       
     </div>
