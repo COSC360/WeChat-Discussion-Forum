@@ -60,12 +60,14 @@ height: 80px;
   padding-right: 1em;
   padding-left: 2em;
   max-width: 16em;
+  padding-bottom: 5em;
 }
 div.scroll{
     overflow-y: auto;
     overflow-x: hidden;
     text-align: justify;
     height: 650px;
+    padding-bottom: 4em;
 }
 .posts{
     color: rgb(160, 158, 158);
@@ -97,7 +99,17 @@ div.scroll{
     border-radius: 1em;
     padding-left: 0.5em;
     padding-right: 0.5em;
-    padding-bottom: 1em;
+    padding-bottom: 2em;
+}
+.popularAdmin{
+  color: rgb(160, 158, 158);
+  border: solid #262D34;
+  background-color: #262D34;
+  border-radius: 1em;
+  padding-left: 0.5em;
+  padding-right: 0.5em;
+  padding-bottom: 7em;
+  padding-top: 1em;
 }
 .categories{
     color: rgb(160, 158, 158);

@@ -230,7 +230,7 @@ $result = mysqli_query($conn, $query);
 
 	<div class = "flex-right"> 
 	<h1 style='color:#A67EF3;'>Comments</h1>
-        <div class = "popular">
+        <div class = "popularAdmin">
 			<div class = "scroll">
 		<?php
 			// Get the comments for the current post
