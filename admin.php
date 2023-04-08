@@ -48,7 +48,7 @@ $result = mysqli_query($conn, $query);
                 echo '<a href = "admin.php" class = "button" style = "color: #fbeee0;">Admin</a>'; 
                 } 
             }}?>  
-                    <button id="UserStatistics" class = "button"><i class="fas fa-chart-bar fa-lg"></i></button>
+                    <button id="UserStatistics"><i class="fas fa-chart-bar fa-lg"></i></button>
                     <script>
                         const userStatsButton = document.getElementById("UserStatistics");
                         userStatsButton.addEventListener("click", function() {
