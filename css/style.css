@@ -32,7 +32,7 @@ height: 80px;
     margin-top: -3em;
 }
 .flex{
-    height: 45em;
+    height: 52em;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -57,6 +57,8 @@ height: 80px;
   align-items: left;
   flex-direction: column;
   margin-right: auto;
+  padding-right: 1em;
+  padding-left: 2em;
   max-width: 16em;
 }
 div.scroll{
