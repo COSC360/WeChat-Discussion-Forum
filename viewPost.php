@@ -97,21 +97,45 @@ session_start();
     </div>
 
    
-        <!-- displaying comments -->
-    <div class = "commentContainer">
-        <?php foreach ($comments as $comment): ?>
-    <div class="comment">
-    <p style="color:#A67EF3; font-size: .8em;"><a href="viewAccount.php?user_id=<?php echo $comment['user_id']; ?>"><?php echo $comment['username']; ?></a></p>
-        <p><?php echo $comment['content']; ?></p>
-        <div class="postContainer">
-            <div class="postScore"><?php echo $comment['comment_score']; ?></div>
-            <div class="upvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-up"></i></div>
-            <div class="downvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-down"></i></div>
-        </div>
-        </div>
-    
-    <?php endforeach; ?>
+     <!-- displaying comments -->
+<div class="commentContainer">
+  <?php foreach ($comments as $comment): ?>
+  <div class="comment">
+    <div class="commentHeader">
+      <p style="color:#A67EF3; font-size: .8em;">
+        <a href="viewAccount.php?user_id=<?php echo $comment['user_id']; ?>"><?php echo $comment['username']; ?></a>
+      </p>
+      <button class="toggleComment">Hide</button>
     </div>
+    <div class="commentContent">
+      <p><?php echo $comment['content']; ?></p>
+      <div class="postContainer">
+        <div class="postScore"><?php echo $comment['comment_score']; ?></div>
+        <div class="upvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-up"></i></div>
+        <div class="downvote" style="cursor: pointer;" comment_id="<?php echo $comment['comment_id']; ?>"><i class="fa-solid fa-arrow-down"></i></div>
+      </div>
+    </div>
+  </div>
+  <?php endforeach; ?>
+</div>
+
+<script>
+  const toggleButtons = document.querySelectorAll('.toggleComment');
+  toggleButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const comment = button.parentNode.parentNode;
+      const content = comment.querySelector('.commentContent');
+      content.classList.toggle('hidden');
+      button.textContent = content.classList.contains('hidden') ? 'Show' : 'Hide';
+    });
+  });
+</script>
+
+<style>
+  .hidden {
+    display: none;
+  }
+</style>
         
 
         <script>
