@@ -3,7 +3,6 @@
 
 ## 360 Project Proposal (Milestone 1)
 
-Members: Aryan Agnihotri and Joss White
 
 Project Description and Details
 
